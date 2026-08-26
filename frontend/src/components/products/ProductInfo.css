@@ -1,0 +1,153 @@
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.brand-badge {
+  background-color: #080aa0;
+  color: #ffff;
+  width: fit-content;
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.product-main-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1c095e;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  color: #1c095e;
+}
+
+.desc-divider {
+  border-top: 1px solid rgb(105, 114, 129);
+  border-bottom: 1px solid rgb(105, 114, 129);
+  padding: 16px 0;
+}
+
+.desc-text {
+  color: #4a4c50;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.selector-matrix-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.matrix-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c095e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 8px 0;
+}
+
+.size-grid-frame {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 92px;
+  gap: 8px;
+}
+
+.size-btn {
+  padding: 7px 0;
+  width: 65px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #a6b9dd;
+  color: #1a1a1b;
+  border: 2px solid #92addf;
+}
+
+.size-btn:hover {
+  background-color: #345491;
+  color: aliceblue;
+}
+
+.size-btn.active-size {
+  background-color: #161553;
+  color: aliceblue;
+  border: 2px solid #36a7e9;
+}
+
+.action-btn-wrapper {
+  padding-top: 16px;
+}
+
+.add-cart-btn {
+  width: 60%;
+  background-color: #0e0f44;
+  color: #ffff;
+  border: 2px solid #29d0ee;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 9px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 3px 4px 15px -3px #080aa0;
+  transition: all 0.2s ease;
+}
+
+.add-cart-btn:hover {
+  background-color: #251d6e;
+  border: 2px solid #d2dd35;
+  color: aliceblue;
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .detail-page-wrapper {
+    padding: 5px;
+  }
+
+  .split-layout-matrix {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .info-container {
+    margin-right: 10px;
+  }
+  .left-gallery-span,
+  .right-info-span {
+    flex: none;
+    width: 100%;
+    position: static;
+  }
+
+  .product-main-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .brand-badge {
+    font-size: 10px;
+    padding: 5px 6px;
+    font-weight: 400;
+  }
+}

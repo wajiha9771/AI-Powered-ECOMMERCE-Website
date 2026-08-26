@@ -1,0 +1,254 @@
+.track-section {
+  max-width: 1200px;
+  
+  /* margin: 0 auto; */
+  padding: 60px 40px;
+  font-family: "Poppins", sans-serif;
+
+}
+
+.track-header {
+  text-align: center;
+  margin-bottom: 40px;
+ 
+}
+
+.track-main-title {
+  font-size: 50px;
+  font-weight: 700;
+  color: rgb(28, 9, 94);
+  margin-bottom: 4px;
+}
+
+.track-subtitle {
+  font-size: 25px;
+  color: rgb(105, 103, 103);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.track-input-card {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  background: #e5e7ee;
+  border: 2px solid #5e5c5c;
+  border-radius: 25px;
+  padding: 35px;
+}
+
+.track-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.track-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.track-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #050646;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.track-input-group input {
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #242222;
+  background: #fff;
+  border: 2px solid rgba(94, 92, 92, 0.4);
+  border-radius: 12px;
+  outline: none;
+}
+
+.track-input-group input:focus {
+  border-color: #060757;
+  box-shadow: 0 0 8px rgba(6, 7, 87, 0.15);
+}
+
+.track-submit-btn {
+  background-color: #060757;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.track-submit-btn:hover {
+  background-color: #1c095e;
+}
+
+.tracking-status-display-box {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #e5e7ee;
+  border: 2px solid #5e5c5c;
+  border-radius: 25px;
+  padding: 40px;
+}
+
+.status-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(6, 7, 87, 0.1);
+  padding-bottom: 18px;
+  margin-bottom: 30px;
+}
+
+.status-summary-header h3 {
+  font-size: 20px;
+  color: #050646;
+  margin: 0;
+}
+
+.status-summary-header h3 span {
+  color: #0ea5e9;
+}
+
+.status-badge-active {
+  background: #080aa0;
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+.vertical-timeline-trail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-left: 20px;
+}
+
+.vertical-timeline-trail::before {
+  content: "";
+  position: absolute;
+  left: 36px;
+  top: 15px;
+  bottom: 15px;
+  width: 3px;
+  background: rgba(94, 92, 92, 0.2);
+  z-index: 1;
+}
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  gap: 25px;
+  z-index: 2;
+}
+
+.node-icon-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid #5e5c5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.node-details h4 {
+  font-size: 17px;
+  margin: 0 0 4px 0;
+}
+
+.node-details p {
+  font-size: 14px;
+  color: #5e5c5c;
+  margin: 0 0 4px 0;
+  line-height: 1.5;
+}
+
+.node-timestamp {
+  font-size: 12px;
+  color: rgba(94, 92, 92, 0.8);
+  font-weight: 500;
+}
+.step-completed .node-icon-circle {
+  background: #080aa0;
+  border-color: #080aa0;
+  color: #fff;
+}
+.step-completed .node-details h4 {
+  color: #5e5c5c;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.step-active .node-icon-circle {
+  background: #0ea5e9;
+  border-color: #050646;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+  animation: pulseTrackingNode 1.5s infinite;
+}
+.step-active .node-details h4 {
+  color: #050646;
+  font-weight: 700;
+}
+
+.step-pending .node-icon-circle {
+  background: #fff;
+  border-color: rgba(94, 92, 92, 0.4);
+  color: rgba(94, 92, 92, 0.4);
+}
+.step-pending .node-details h4 {
+  color: rgba(94, 92, 92, 0.6);
+}
+
+@keyframes pulseTrackingNode {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .track-section {
+    padding: 30px 15px;
+  }
+  .track-main-title {
+    font-size: 34px;
+  }
+  .track-subtitle {
+    font-size: 15px;
+  }
+  .track-input-card,
+  .tracking-status-display-box {
+    padding: 25px 20px;
+  }
+  .status-summary-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .node-details h4 {
+    font-size: 15px;
+  }
+}
