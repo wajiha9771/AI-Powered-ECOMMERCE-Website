@@ -1,21 +1,21 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const fetchAnalytics = async () => {
-  const response = await fetch("http://localhost:5000/api/analytics");
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics`);
   if (!response.ok) {
     throw new Error("Failed to fetch analytics logs.");
   }
   return response.json();
 };
 const fetchAnalyticsSummary = async () => {
-  const response = await fetch("http://localhost:5000/api/analytics/summary");
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics/summary`);
   if (!response.ok) {
     throw new Error("Failed to fetch analytics summary.");
   }
   return response.json();
 };
 const trackEventAPI = async (eventData) => {
-  const response = await fetch("http://localhost:5000/api/analytics", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

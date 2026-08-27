@@ -1,13 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchSliders = async () => {
-  const response = await fetch("http://localhost:5000/api/sliders");
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sliders`);
   if (!response.ok) {
     throw new Error("Failed to fetch slider catalog from the database.");
   }
   return response.json();
 };
 const addSliderAPI = async (newSliderData) => {
-  const response = await fetch("http://localhost:5000/api/sliders", {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sliders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const addSliderAPI = async (newSliderData) => {
   return response.json();
 };
 const updateSliderAPI = async ({ id, updatedData }) => {
-  const response = await fetch(`http://localhost:5000/api/sliders/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sliders/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const updateSliderAPI = async ({ id, updatedData }) => {
 };
 const deleteSliderAPI = async (sliderId) => {
   const response = await fetch(
-    `http://localhost:5000/api/sliders/${sliderId}`,
+  `${import.meta.env.VITE_API_URL}/api/sliders/${sliderId}`,
     {
       method: "DELETE",
     },

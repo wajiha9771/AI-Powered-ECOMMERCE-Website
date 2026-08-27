@@ -1,13 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchCMSData = async () => {
-  const response = await fetch("http://localhost:5000/api/cms");
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cms`);
   if (!response.ok) {
     throw new Error("Error occured in loading CMS data");
   }
   return response.json();
 };
 const updateCMSData = async (updatedConfig) => {
-  const response = await fetch("http://localhost:5000/api/cms", {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cms`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

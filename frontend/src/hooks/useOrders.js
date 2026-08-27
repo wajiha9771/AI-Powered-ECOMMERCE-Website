@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchOrders = async () => {
-  const response = await fetch("http://localhost:5000/api/orders");
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
   if (!response.ok) {
     throw new Error("Failed to fetch customer orders from the database.");
   }
@@ -8,7 +8,7 @@ const fetchOrders = async () => {
 };
 const updateOrderStatusAPI = async ({ orderId, status }) => {
   const response = await fetch(
-    `http://localhost:5000/api/orders/${orderId}/status`,
+`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/status`,
     {
       method: "PUT",
       headers: {
@@ -39,7 +39,7 @@ export const useUpdateOrderStatus = () => {
   });
 };
 const createOrderAPI = async (newOrderData) => {
-  const response = await fetch("http://localhost:5000/api/orders", {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const useUserOrders = (userId) => {
     queryFn: async () => {
       if (!userId) return [];
       const response = await fetch(
-        `http://localhost:5000/api/orders/user/${userId}`,
+    `${import.meta.env.VITE_API_URL}/api/orders/user/${userId}`,
       );
 
       if (!response.ok) {

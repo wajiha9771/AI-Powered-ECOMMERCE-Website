@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchContactMessages = async () => {
-  const response = await fetch("http://localhost:5000/api/contact");
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`);
   if (!response.ok) {
     throw new Error("Failed to fetch contact messages.");
   }
@@ -8,7 +8,7 @@ const fetchContactMessages = async () => {
 };
 const deleteContactMessageAPI = async (messageId) => {
   const response = await fetch(
-    `http://localhost:5000/api/contact/${messageId}`,
+`${import.meta.env.VITE_API_URL}/api/contact/${messageId}`,
     {
       method: "DELETE",
     },

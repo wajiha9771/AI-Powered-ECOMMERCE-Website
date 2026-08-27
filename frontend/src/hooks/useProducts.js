@@ -1,13 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchProducts = async () => {
-  const response = await fetch("http://localhost:5000/api/products");
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
   if (!response.ok) {
     throw new Error("Failed to fetch product catalog from the database.");
   }
   return response.json();
 };
 const addProductAPI = async (newProductPayload) => {
-  const response = await fetch("http://localhost:5000/api/products", {
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
     method: "POST",
     body: newProductPayload,
   });
@@ -20,7 +20,7 @@ const addProductAPI = async (newProductPayload) => {
   return response.json();
 };
 const updateProductAPI = async ({ id, updatedData }) => {
-  const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
     method: "PUT",
     body: updatedData,
   });
@@ -32,7 +32,7 @@ const updateProductAPI = async ({ id, updatedData }) => {
 };
 const deleteProductAPI = async (productId) => {
   const response = await fetch(
-    `http://localhost:5000/api/products/${productId}`,
+`${import.meta.env.VITE_API_URL}/api/products/${productId}`,
     {
       method: "DELETE",
     },

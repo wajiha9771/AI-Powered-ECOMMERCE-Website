@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 const registerApi = async (userData) => {
-  const response = await fetch("http://localhost:5000/api/auth/register", {
+ const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
@@ -12,7 +12,7 @@ const registerApi = async (userData) => {
   return response.json();
 };
 const loginApi = async (credentials) => {
-  const response = await fetch("http://localhost:5000/api/auth/login", {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
