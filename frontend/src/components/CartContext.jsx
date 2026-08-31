@@ -1,10 +1,28 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 const CartContext = createContext();
 export const CartProvider = ({ children }) => {
+ 
   const [cartItems, setCartItems] = useState(() => {
+  try {
     const savedCart = localStorage.getItem("shopping_cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+
+    if (!savedCart) return [];
+
+    const parsedCart = JSON.parse(savedCart);
+
+    if (!Array.isArray(parsedCart)) return [];
+
+    return parsedCart.filter(
+      (item) =>
+        item &&
+        (item._id || item.id) &&
+        Number(item.qty) > 0
+    );
+  } catch (error) {
+    localStorage.removeItem("shopping_cart");
+    return [];
+  }
+});
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerTab, setDrawerTab] = useState("cart");
 
@@ -63,7 +81,10 @@ export const CartProvider = ({ children }) => {
 
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
-  const totalItems = cartItems.reduce((acc, item) => acc + (item?.qty || 0), 0);
+  const totalItems = cartItems.reduce(
+  (acc, item) => acc + Number(item?.qty || 0),
+  0
+);
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + (item?.price || 0) * (item?.qty || 0),
     0,

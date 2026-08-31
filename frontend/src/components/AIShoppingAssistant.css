@@ -3,34 +3,32 @@
 }
 .ai-floating-button {
   position: fixed;
-  right: 55px;
-  bottom: 45px;
+  left: 55px;
+  bottom: 32px;
   z-index: 9999;
   display: flex;
   align-items: center;
   gap: 9px;
-  border: 2px solid #fbbf24;
-  border-radius: 50px;
+ border-radius: 50px;
   padding: 13px 20px;
-  background-color: #09269c;
-  color: #d6d4ec;
+  background-color:#0f172a;
+  border: 1px solid rgb(179,195,217);
+  color:rgb(179,195,217);
   font-family: "Poppins", sans-serif;
   font-size: 19px;
   font-weight: 600;
-
   cursor: pointer;
-
-  box-shadow: 0 8px 25px rgb(161, 152, 23);
-  transition:
+transition:
     transform 0.25s ease,
     background 0.25s ease,
     box-shadow 0.25s ease;
 }
 .ai-floating-button:hover {
-  background: #0b0d88;
-  color: #fdfdff;
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgb(156, 151, 228);
+  box-shadow: 0 12px 30px rgb(182, 181, 199);
+  background: rgb(16, 18, 51);
+  border: 1px solid #ffffff;;
+   color: #ffffff;
 }
 
 .ai-floating-icon {
@@ -44,7 +42,7 @@
 .ai-chat-window {
   position: fixed;
   top: 80px;
-  right: 28px;
+  left: 28px;
   bottom: 28px;
   width: 420px;
   height: auto;
@@ -83,7 +81,8 @@
   min-height: 74px;
   padding: 14px 18px;
   box-sizing: border-box;
-  background: #1f1b5a;
+   background: rgb(16, 18, 51);
+  /* background: #1f1b5a; */
   color: #ffffff;
   overflow: visible;
 }
@@ -513,16 +512,20 @@
 @media (max-width: 768px) {
   .ai-chat-window {
     top: 60px;
-    right: 18px;
+    left: 18px;
     bottom: 18px;
-    width: 380px;
+    width: 180px;
     height: auto;
     max-height: calc(100vh - 78px);
   }
 
   .ai-floating-button {
-    right: 20px;
+    left: 20px;
     bottom: 20px;
+    width:fit-content;
+  }
+   .ai-input-container{
+    margin-right:10px;
   }
 }
 
@@ -537,7 +540,11 @@
     border-radius: 0;
     border: none;
   }
-
+ .ai-floating-button {
+    left: 20px;
+    bottom: 20px;
+    width: fit-content;
+  }
   .ai-chat-header {
     min-height: 70px;
     padding: 14px 15px;
@@ -552,7 +559,7 @@
   }
 
   .ai-chat-avatar {
-    width: 40px;
+    width: 30px;
     height: 40px;
     min-width: 40px;
     min-height: 40px;
@@ -564,7 +571,7 @@
     height: 36px;
     min-width: 36px;
     min-height: 36px;
-    margin-left: 8px;
+    margin-right: 10px;
     font-size: 20px;
   }
 
@@ -588,5 +595,8 @@
 
   .ai-floating-text {
     font-size: 12px;
+  }
+  .ai-input-container{
+    margin-right:10px;
   }
 }

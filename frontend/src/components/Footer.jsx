@@ -207,72 +207,7 @@ const Footer = ({ openDrawerWithTab }) => {
       <div className="footer-bottom">
         <div className="footer-bottom-content">
           <p>&copy; {currentYear} Nex-Style. All rights reserved.</p>
-          <div className="payment-methods">
-            <a
-              href={paymentLinks.visa || "https://www.visa.com"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="payment-badge"
-              title="Visa"
-              aria-label="Visa"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M10.1 16.5l1.3-8.1h2.2l-1.3 8.1zm6.9-8.1c-.5-.2-1.3-.4-2.2-.4-2.4 0-4 1.2-4 2.9 0 1.3 1.2 2 2.1 2.4.9.4 1.2.7 1.2 1.1 0 .6-.7.9-1.4.9-1.2 0-1.8-.2-2.4-.5l-.3-.1-.4 2.4c.7.3 1.9.6 3.1.6 2.5 0 4.1-1.2 4.1-3 0-1-.6-1.8-1.9-2.4-.8-.4-1.3-.6-1.3-1 0-.4.4-.7 1.2-.7.7 0 1.2.1 1.6.3l.2.1.3-2.5zm4.8 0h-1.7c-.5 0-.9.3-1.1.8l-3.9 9.3h2.3l.5-1.3h2.8l.3 1.3h2l-1.2-10.1zm-1.8 6.2l1.1-2.9.6 2.9h-1.7zM4.7 8.4L2.4 14c-.2-.6-.9-2-1.7-2.8l1.8 5.3h2.4l3.6-10.1H4.7z" />
-              </svg>
-            </a>
-            <a
-              href={paymentLinks.mastercard || "https://www.mastercard.com"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="payment-badge"
-              title="Mastercard"
-              aria-label="Mastercard"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 17.3a6 6 0 0 1 3.8-1.4A6 6 0 0 1 12 6.8a6 6 0 0 1-3.8 9.1c1 .9 2.3 1.4 3.8 1.4zm-3.8-1.5A6 6 0 0 1 6 12c0-1.6.6-3 1.6-4.1A6 6 0 0 0 2.3 12a6 6 0 0 0 3.7 5.6c.7-.6 1.5-1.2 2.2-1.8zm9.6 0a6 6 0 0 1 2.2 1.7A6 6 0 0 0 21.8 12a6 6 0 0 0-3.7-5.5A6 6 0 0 1 18 12c0 1.6-.6 3-1.6 4.1z" />
-              </svg>
-            </a>
-            <a
-              href={paymentLinks.stripe || "https://stripe.com"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="payment-badge"
-              title="Stripe"
-              aria-label="Stripe"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M14 10.1c0-.7-.6-1-1.4-1-.9 0-1.6.3-2.2.6l-.5-1.9c.7-.3 1.7-.6 2.9-.6 2.1 0 3.6 1 3.6 3v4.6c0 .7.1 1.3.2 1.7h-2.3l-.1-.6c-.5.5-1.3.8-2.3.8-1.7 0-3-.9-3-2.4 0-1.8 1.6-2.4 3.6-2.4.5 0 .9 0 1.2.1v-.8zm-1.2 3.7c.7 0 1.2-.2 1.2-.8v-.6l-.9-.1c-.8 0-1.4.3-1.4.9 0 .4.4.6 1.1.6zM6.9 5.6l.1-1.9h2.4v1.9h1.6v1.9H9.4V12c0 .5.4.7.9.7.3 0 .5 0 .7-.1l-.1 2a3.8 3.8 0 0 1-1.3.1c-1.9 0-2.7-.8-2.7-2.5V7.5H5.4V5.6h1.5zm10.8 4.4h2.2v1.9h-2.2v4.6h2.5v1.9h-5V7.5h2.5V10zM2.3 7.5h2.4v8.9H2.3V7.5z" />
-              </svg>
-            </a>
-            <a
-              href={paymentLinks.paypal || "https://www.paypal.com"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="payment-badge"
-              title="PayPal"
-              aria-label="PayPal"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M20 6.1c.4 1.7 0 3.4-1 4.8-1.1 1.6-2.9 2.5-4.7 2.5h-2.3l-1.3 5.9c0 .1-.2.4-.4.4H7.2c-.1 0-.3-.2-.3-.3l2.7-14.7c0-.1.2-.5.7-.5h5.7c1.7 0 3.1.3 3.8 1.2.2.3.3.6.3.7z" />
-              </svg>
-            </a>
-          </div>
+          
         </div>
       </div>
     </footer>

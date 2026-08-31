@@ -1,5 +1,569 @@
  /* Admin Layout */
- .admin-brand {
+.admin-login-page {
+min-height: 100vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 30px 20px;
+box-sizing: border-box;
+background-color: #0f172a;
+font-family: inherit;
+}
+
+.admin-login-card {
+width: 100%;
+max-width: 430px;
+border-radius: 14px;
+padding: 35px;
+box-sizing: border-box;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+background-color: #1e293b;
+border: 1px solid #334155;
+box-sizing: border-box;
+
+}
+
+.admin-login-header {
+text-align: center;
+margin-bottom: 28px;
+}
+.admin-login-brand {
+margin: 0;
+color: #d9dbdf;
+font-size: 30px;
+font-weight: 700;
+}
+.admin-login-brand span {
+color: #38bdf8;
+font-size: 16px;
+margin-left: 5px;
+}
+.admin-login-subtitle {
+margin: 8px 0 0;
+color: #94a1b4;
+font-size: 14px;
+}
+
+.admin-login-form {
+display: flex;
+flex-direction: column;
+gap: 18px;
+}
+
+.admin-login-field {
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.admin-login-field label {
+color: #93a9ce;
+font-size: 14px;
+font-weight: 600;
+}
+
+.admin-login-field input {
+width: 100%;
+padding: 12px 14px;
+box-sizing: border-box;
+border: 1px solid #cbd5e0;
+border-radius: 8px;
+background-color: #ffffff;
+color: #24334d;
+font-size: 14px;
+outline: none;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-login-field input:focus {
+border-color: #abd1ee;
+box-shadow: 0 0 0 3px rgba(83, 173, 241, 0.12);
+}
+
+.admin-login-field input::placeholder {
+color: #a0aec0;
+}
+
+.admin-login-button {
+width: 100%;
+padding: 12px;
+margin-top: 5px;
+border: none;
+border-radius: 8px;
+background-color: #2c96c4;
+color: #24334d;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.admin-login-button:hover {
+background-color: #38bdf8;
+}
+.admin-login-button:active {
+transform: translateY(1px);
+}
+
+.admin-login-button:disabled {
+background-color: #93a4bd;
+cursor: not-allowed;
+}
+.admin-forgot-password {
+width: 100%;
+margin-top: 16px;
+padding: 10px;
+background: transparent;
+border: none;
+color: #a0aec0;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: color 0.2s ease;
+}
+
+.admin-forgot-password:hover {
+color: #38bdf8;
+text-decoration: underline;
+}
+
+
+/* Admin Login Popup */
+
+.admin-login-overlay {
+position: fixed;
+inset: 0;
+z-index: 2000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+box-sizing: border-box;
+background-color: rgba(15, 23, 42, 0.55);
+}
+
+.admin-login-modal {
+width: 100%;
+max-width: 420px;
+padding: 30px;
+box-sizing: border-box;
+border-radius: 14px;
+background-color: #ffffff;
+text-align: center;
+box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.admin-login-modal-icon {
+width: 58px;
+height: 58px;
+margin: 0 auto 15px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 27px;
+font-weight: 700;
+}
+
+.admin-login-modal-icon.success {
+background-color: #d1fae5;
+color: #1206bb;
+}
+
+.admin-login-modal-icon.error {
+background-color: #fee2e2;
+color: #dc2626;
+}
+
+.admin-login-modal h2 {
+margin: 0;
+color: #24334d;
+font-size: 25px;
+}
+
+.admin-login-modal p {
+margin: 10px 0 0;
+color: #718096;
+font-size: 18px;
+line-height: 1.5;
+}
+
+.admin-login-modal-button {
+margin-top: 20px;
+padding: 9px 22px;
+border: none;
+border-radius: 7px;
+background-color: #38bdf8;
+color: #ffffff;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+.admin-login-modal-button:hover {
+background-color:  #1b273b;
+}
+.admin-forgot-page {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+box-sizing: border-box;
+background-color: #f1f2f6;
+}
+
+.admin-forgot-card {
+width: 100%;
+max-width: 430px;
+background-color: #ffffff;
+padding: 32px;
+border-radius: 16px;
+box-sizing: border-box;
+box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+.admin-forgot-header {
+text-align: center;
+margin-bottom: 32px;
+}
+
+.admin-forgot-brand {
+margin: 0;
+color: #24334d;
+font-size: 30px;
+font-weight: 700;
+}
+
+.admin-forgot-title {
+margin: 4px 0 0;
+color: #38bdf8;
+font-size: 16px;
+font-weight: 600;
+}
+
+.admin-forgot-description {
+margin: 16px 0 0;
+color: #6b7280;
+font-size: 14px;
+line-height: 1.6;
+}
+
+.admin-forgot-form {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.admin-forgot-field {
+display: flex;
+flex-direction: column;
+}
+
+.admin-forgot-field label {
+margin-bottom: 8px;
+color: #24334d;
+font-size: 14px;
+font-weight: 600;
+}
+
+.admin-forgot-field input {
+width: 100%;
+padding: 12px 15px;
+box-sizing: border-box;
+border: 1px solid #d1d5db;
+border-radius: 8px;
+background-color: #ffffff;
+color: #24334d;
+font-size: 14px;
+outline: none;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-forgot-field input:focus {
+border-color: #24334d;
+box-shadow: 0 0 0 3px rgba(36, 51, 77, 0.12);
+}
+
+.admin-forgot-field input::placeholder {
+color: #9ca3af;
+}
+
+.admin-forgot-submit {
+width: 100%;
+padding: 12px 16px;
+border: none;
+border-radius: 8px;
+background-color: #24334d;
+color: #ffffff;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.admin-forgot-submit:hover {
+background-color: #1b273b;
+}
+
+.admin-forgot-submit:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+}
+
+.admin-forgot-back {
+width: 100%;
+margin-top: 20px;
+padding: 0;
+border: none;
+background: transparent;
+color: #24334d;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: color 0.2s ease;
+}
+
+.admin-forgot-back:hover {
+color: #38bdf8;
+text-decoration: underline;
+}
+
+.admin-forgot-overlay {
+position: fixed;
+inset: 0;
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+box-sizing: border-box;
+background-color: rgba(15, 23, 42, 0.6);
+}
+
+.admin-forgot-modal {
+width: 100%;
+max-width: 420px;
+padding: 32px;
+box-sizing: border-box;
+border-radius: 16px;
+background-color: #ffffff;
+text-align: center;
+box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+}
+
+.admin-forgot-modal-icon {
+width: 64px;
+height: 64px;
+margin: 0 auto 16px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+font-size: 30px;
+font-weight: 700;
+}
+
+.admin-forgot-modal-icon.success {
+background-color: #dbeafe;
+color: #24334d;
+}
+
+.admin-forgot-modal-icon.error {
+background-color: #fee2e2;
+color: #dc2626;
+}
+
+.admin-forgot-modal h2 {
+margin: 0;
+color: #24334d;
+font-size: 20px;
+font-weight: 600;
+}
+
+.admin-forgot-modal p {
+margin: 12px 0 0;
+color: #6b7280;
+font-size: 14px;
+line-height: 1.6;
+}
+
+.admin-forgot-modal-button {
+margin-top: 24px;
+padding: 10px 28px;
+border: none;
+border-radius: 8px;
+background-color: #24334d;
+color: #ffffff;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease;
+}
+
+.admin-forgot-modal-button:hover {
+background-color: #1b273b;
+}
+
+
+/* Admin Reset Password Page */
+
+.admin-reset-password-page {
+min-height: 100vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 30px 20px;
+box-sizing: border-box;
+background-color: #0f172a;
+font-family: inherit;
+}
+
+.admin-reset-password-card {
+width: 100%;
+max-width: 430px;
+background-color: #1e293b;
+border: 1px solid #334155;
+border-radius: 14px;
+padding: 35px;
+box-sizing: border-box;
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-reset-password-header {
+text-align: center;
+margin-bottom: 28px;
+}
+
+.admin-reset-password-brand {
+margin: 0;
+color: #ffffff;
+font-size: 30px;
+font-weight: 700;
+}
+
+.admin-reset-password-brand span {
+color: #38bdf8;
+font-size: 16px;
+margin-left: 5px;
+}
+
+.admin-reset-password-subtitle {
+margin: 10px 0 0;
+color: #cbd5e1;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.admin-reset-password-form {
+display: flex;
+flex-direction: column;
+gap: 18px;
+}
+
+.admin-reset-password-field {
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.admin-reset-password-field label {
+color: #e2e8f0;
+font-size: 14px;
+font-weight: 600;
+}
+
+.admin-reset-password-field input {
+width: 100%;
+padding: 12px 14px;
+box-sizing: border-box;
+border: 1px solid #475569;
+border-radius: 8px;
+background-color: #0f172a;
+color: #ffffff;
+font-size: 14px;
+outline: none;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-reset-password-field input:focus {
+border-color: #38bdf8;
+box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+.admin-reset-password-field input::placeholder {
+color: #94a3b8;
+}
+
+.admin-reset-password-button {
+width: 100%;
+padding: 12px;
+margin-top: 5px;
+border: none;
+border-radius: 8px;
+background-color: #24334d;
+color: #ffffff;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.admin-reset-password-button:hover {
+background-color: #334e73;
+}
+
+.admin-reset-password-button:active {
+transform: translateY(1px);
+}
+
+.admin-reset-password-button:disabled {
+background-color: #64748b;
+cursor: not-allowed;
+}
+
+.admin-reset-password-back {
+width: 100%;
+margin-top: 16px;
+padding: 10px;
+background: transparent;
+border: none;
+color: #cbd5e1;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: color 0.2s ease;
+}
+
+.admin-reset-password-back:hover {
+color: #38bdf8;
+text-decoration: underline;
+}
+
+.password-eye-button {
+position: absolute;
+right: 515px;
+top: 55%;
+transform: translateY(-50%);
+background: none;
+border: none;
+padding: 0;
+margin: 0;
+cursor: pointer;
+font-size: 16px;
+line-height: 1;
+z-index: 2;
+color: #a0aec0;
+}
+
+
+.password-eye-button:hover {
+color: #1e3a8a;
+}
+
+.admin-brand {
   padding: 20px;
   font-size: 1.2rem;
   border-bottom: 1px solid #b9b9c5;
@@ -540,13 +1104,6 @@
 .btn-secondary-sm { background-color: #edf2f7; color: #4a5568; padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e0; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
 .btn-secondary-sm:hover { background-color: #e2e8f0; }
 
-
-
-
-/* ==========================================
-   ANALYTICS DASHBOARD
-========================================== */
-
 .admin-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -596,12 +1153,6 @@
   font-size: 28px;
   font-weight: 700;
 }
-
-
-/* ==========================================
-   EVENT BREAKDOWN
-========================================== */
-
 .admin-analytics-section {
   background: #ffffff;
   border: 1px solid #d7d9df;
@@ -646,11 +1197,6 @@
   display: none;
 }
 
-
-/* ==========================================
-   ANALYTICS RESPONSIVE
-========================================== */
-
 @media (max-width: 1000px) {
 
   .admin-stats-grid {
@@ -692,10 +1238,6 @@
   }
 
 }
-/* ==========================================
-   ANALYTICS SUMMARY CARDS
-========================================== */
-
 .analytics-summary-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -745,12 +1287,6 @@
   font-size: 28px;
   font-weight: 700;
 }
-
-
-/* ==========================================
-   ANALYTICS RESPONSIVE
-========================================== */
-
 @media (max-width: 1000px) {
   .analytics-summary-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -783,14 +1319,6 @@
 /* Responsive Media Query for AI Analytics Dashboard */
 
  
-
-
-
-
-/* ==========================================
-   MOBILE ADMIN PANEL
-========================================== */
-
 @media (max-width: 768px) {
 
   /* Main layout */
@@ -805,12 +1333,7 @@
     height: auto;
     overflow-y: visible;
   }
-
-  /* ------------------------------------------
-     Mobile Admin Header
-  ------------------------------------------ */
-
-  .admin-sidebar {
+.admin-sidebar {
     width: 100%;
     display: block;
   }
@@ -873,9 +1396,9 @@
     background-color: #24334d;
   }
 
-  /* ------------------------------------------
-     Mobile Side Drawer
-  ------------------------------------------ */
+ 
+     /* Mobile Side Drawer */
+  
 
   .admin-sidebar .admin-nav {
     display: none;
@@ -912,10 +1435,6 @@
   font-size: 24px;
   cursor: pointer;
 }
-  /* ------------------------------------------
-     CMS
-  ------------------------------------------ */
-
   .admin-cms-page {
     padding: 10px;
   }
@@ -944,11 +1463,6 @@
     margin-top: 15px;
     box-sizing: border-box;
   }
-
-  /* ------------------------------------------
-     Orders / Tables
-  ------------------------------------------ */
-
   .admin-orders-page {
     padding: 10px;
   }
@@ -981,4 +1495,56 @@
     padding: 4px 8px;
     font-size: 0.75rem;
   }
+}
+@media (max-width: 600px) {
+.admin-login-page {
+padding: 20px 15px;
+}
+
+.admin-login-card {
+padding: 25px 20px;
+border-radius: 12px;
+}
+
+.admin-login-brand {
+font-size: 26px;
+}
+
+.admin-login-modal {
+padding: 25px 20px;
+}
+
+.admin-reset-password-page {
+padding: 20px 15px;
+}
+
+.admin-reset-password-card {
+padding: 25px 20px;
+border-radius: 12px;
+}
+
+.admin-reset-password-brand {
+font-size: 26px;
+}
+}
+
+
+ 
+ @media (max-width: 480px) {
+.admin-forgot-page {
+padding: 15px;
+}
+
+.admin-forgot-card {
+padding: 24px 20px;
+border-radius: 12px;
+}
+
+.admin-forgot-brand {
+font-size: 26px;
+}
+
+.admin-forgot-modal {
+padding: 24px 20px;
+}
 }

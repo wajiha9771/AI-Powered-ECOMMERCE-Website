@@ -22,6 +22,32 @@ const updateOrderStatusAPI = async ({ orderId, status }) => {
   }
   return response.json();
 };
+const deleteOrderAPI = async (orderId) => {
+const response = await fetch(
+`${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
+{
+method: "DELETE",
+},
+);
+
+if (!response.ok) {
+throw new Error("Failed to delete the order.");
+}
+
+return response.json();
+};
+
+export const useDeleteOrder = () => {
+const queryClient = useQueryClient();
+
+return useMutation({
+mutationFn: deleteOrderAPI,
+onSuccess: () => {
+queryClient.invalidateQueries({ queryKey: ["orders"] });
+},
+});
+};
+
 export const useOrders = () => {
   return useQuery({
     queryKey: ["orders"],
@@ -39,20 +65,25 @@ export const useUpdateOrderStatus = () => {
   });
 };
 const createOrderAPI = async (newOrderData) => {
+const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
+const token = storedUser.token;
+
 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newOrderData),
-  });
-  if (!response.ok) {
-    throw new Error(
-      "Failed to create order asset from Database!",
-    );
-  }
-  return response.json();
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+Authorization: `Bearer ${token}`,
+},
+body: JSON.stringify(newOrderData),
+});
+
+if (!response.ok) {
+throw new Error("Failed to create order asset from Database!");
+}
+
+return response.json();
 };
+
 export const useCreateOrder = () => {
   const queryClient = useQueryClient();
   return useMutation({

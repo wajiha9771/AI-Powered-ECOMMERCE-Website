@@ -2,7 +2,7 @@
   background-color: #0f172a;
   color: #b0b0b0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 50px 0 0 0;
+  padding: 20px 0 0 0;
   width: 100%;
 }
 .footer-container {
@@ -20,17 +20,16 @@
 }
 .footer-about .footer-logo {
   font-family: "Playfair Display", "Georgia", serif;
-
-  color: #fbbf24;
+ color:#38bdf8; 
   font-size: 36px;
   margin-bottom: 20px;
   font-weight: 700;
 }
 .footer-about .footer-logo span {
-  color: #fbbf24;
+   color:#38bdf8; 
 }
 .footer-about .footer-logo span.dash {
-  color: #38bdf8;
+ color:#38bdf8;  
 }
 .footer-about p {
   line-height: 1.6;
@@ -106,7 +105,7 @@
 .footer-bottom {
   background-color: #1e293b;
   padding: 10px 0;
-  margin-top: 20px;
+  margin-top: 10px;
   border-top: 1px solid #0a2146;
 }
 .footer-bottom-content {
@@ -114,44 +113,13 @@
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
   font-size: 15px;
 }
-.payment-methods {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.payment-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-  width: 48px;
-  height: 32px;
-  padding: 4px 6px;
-  color: #f9f9f9;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    inset 0px 1px 0 #38bdf8,
-    4px 5px 4px #0ea5e9;
-}
-.payment-badge svg {
-  width: 38px;
-  height: 38px;
-}
-.payment-badge:hover {
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.3);
-  background-color: #1a2332;
-  transform: translateY(-3px);
-  cursor: pointer;
-}
+
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;

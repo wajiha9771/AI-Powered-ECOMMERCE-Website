@@ -1,5 +1,6 @@
 import express from "express";
 import Order from "../models/Order.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 router.get("/", async (req, res) => {
@@ -32,17 +33,11 @@ router.get("/user/:userId", async (req, res) => {
       });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const {
-      userId,
-      customerName,
-      email,
-      phone,
-      shippingAddress,
-      orderItems,
-      totalAmount,
-    } = req.body;
+      userId, customerName, email, phone, shippingAddress, orderItems,
+      totalAmount, paymentMethod, } =  req.body;
     const newOrder = new Order({
       user: userId,
       customerName,
@@ -51,6 +46,7 @@ router.post("/", async (req, res) => {
       shippingAddress,
       orderItems,
       totalAmount,
+      paymentMethod,
       status: "Pending",
     });
 
@@ -89,6 +85,33 @@ router.put("/:id/status", async (req, res) => {
         error: error.message,
       });
   }
+});
+
+router.delete("/:id", async (req, res) => {
+try {
+const { id } = req.params;
+
+
+const deletedOrder = await Order.findByIdAndDelete(id);
+
+if (!deletedOrder) {
+  return res.status(404).json({
+    message: "Order not found in the system!",
+  });
+}
+
+res.status(200).json({
+  message: "Order deleted successfully.",
+  order: deletedOrder,
+});
+
+
+} catch (error) {
+res.status(400).json({
+message: "Failed to delete order.",
+error: error.message,
+});
+}
 });
 
 export default router;

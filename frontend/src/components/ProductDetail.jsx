@@ -45,7 +45,7 @@ const ProductDetail = () => {
         };
         setFormattedProduct(formatted);
         trackEvent({
-          eventType: "click",
+          eventType: "view",
           target: foundProduct.name,
           meta: `Product detail viewed | Product ID: ${foundProduct._id || foundProduct.id}`,
         });

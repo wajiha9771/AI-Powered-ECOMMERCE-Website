@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
       "Please enter a valid email structure",
     ],
   },
+  username: {
+  type: String,
+  unique: true,
+  sparse: true,
+  trim: true,
+},
   password: {
     type: String,
     required: function () {

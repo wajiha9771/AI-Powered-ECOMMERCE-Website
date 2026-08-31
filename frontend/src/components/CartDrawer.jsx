@@ -21,11 +21,13 @@ function CartDrawer() {
   const { mutate: placeOrder, isLoading: isPlacingOrder } = useCreateOrder();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    shippingAddress: "",
-  });
+name: "",
+email: "",
+phone: "",
+shippingAddress: "",
+paymentMethod: "Cash on Delivery",
+});
+
   const [showConfirm, setShowConfirm] = useState(false);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [trackingInput, setTrackingInput] = useState("");
@@ -48,14 +50,24 @@ function CartDrawer() {
       email: formData.email,
       phone: formData.phone,
       shippingAddress: formData.shippingAddress,
+      paymentMethod: formData.paymentMethod,
 
-      orderItems: cartItems.map((item) => ({
-        productId: item._id || item.id,
-        name: item.name,
-        price: Number(item.price),
-        quantity: item.qty,
-        image: item.images?.[0] || "",
-      })),
+      orderItems: cartItems.map((item) => {
+  const cartId = item._id || item.id;
+
+  const originalProductId =
+    typeof cartId === "string" && /^[a-f\d]{24}-/i.test(cartId)
+      ? cartId.substring(0, 24)
+      : cartId;
+
+  return {
+    productId: originalProductId,
+    name: item.name,
+    price: Number(item.price),
+    quantity: item.qty,
+    image: item.images?.[0] || "",
+  };
+}),
 
       totalAmount: totalPrice,
     };
@@ -69,7 +81,14 @@ function CartDrawer() {
         setGeneratedTrackingCode(trackId);
         clearCart();
         setIsCheckingOut(false);
-        setFormData({ name: "", email: "", phone: "", shippingAddress: "" });
+        setFormData({
+name: "",
+email: "",
+phone: "",
+shippingAddress: "",
+paymentMethod: "Cash on Delivery",
+});
+
         setShowOrderSuccess(true);
       },
       onError: (err) => {
@@ -169,6 +188,24 @@ function CartDrawer() {
                       rows="3"
                       required
                     />
+                    <div className="payment-method-section">
+  <label className="payment-method-label">
+    Payment Method
+  </label>
+
+<select
+name="paymentMethod"
+value={formData.paymentMethod}
+onChange={handleInputChange}
+className="drawer-custom-input payment-method-select"
+required
+>
+<option value="Cash on Delivery">Cash on Delivery</option>
+<option value="Card">Card</option>
+<option value="PayPal">PayPal</option>
+  </select>
+</div>
+
                     <div className="checkout-form-buttons-row">
                       <button
                         type="button"
@@ -179,7 +216,7 @@ function CartDrawer() {
                       </button>
                       <button
                         type="submit"
-                        className="proceed-checkout-btn"
+                        className="proceed-checkout-btn order"
                         disabled={isPlacingOrder}
                       >
                         {isPlacingOrder
@@ -287,7 +324,7 @@ function CartDrawer() {
                   value={trackingInput}
                   onChange={(e) => setTrackingInput(e.target.value)}
                   placeholder="e.g., paste your tracking reference here"
-                  className="drawer-custom-input"
+                  className="drawer-custom-input "
                   required
                 />
                 <button type="submit" className="drawer-embedded-submit-btn">
@@ -410,7 +447,14 @@ function CartDrawer() {
                 <button
                   className="proceed-checkout-btn"
                   type="button"
-                  onClick={() => setIsCheckingOut(true)}
+                 onClick={() => {
+const storedUser = localStorage.getItem("userInfo");
+if (!storedUser) {
+window.location.href = "/login";
+return;
+}
+setIsCheckingOut(true);
+}}
                 >
                   Proceed to Checkout
                 </button>
@@ -453,21 +497,54 @@ function CartDrawer() {
               <p className="custom-confirm-text">
                 Your transaction assets have been saved
               </p>
-              <div
-                className="tracking-display-box"
-                style={{
-                  margin: "15px 0",
-                  padding: "10px",
-                  background: "#f5f5f5",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Copy your Tracking Reference:{" "}
-                <span style={{ color: "#1c1d75", margin: "5px" }}>
-                  {generatedTrackingCode}
-                </span>
-              </div>
+            <div
+  className="tracking-display-box"
+  style={{
+    margin: "15px 0",
+    padding: "10px",
+    background: "#f5f5f5",
+    borderRadius: "5px",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "10px",
+  }}
+>
+  <span>
+    Copy your Tracking Reference:{" "}
+    <span style={{ color: "#1c1d75", margin: "5px" }}>
+      {generatedTrackingCode}
+    </span>
+  </span>
+
+<button
+type="button"
+className="copy-tracking-btn"
+onClick={() => {
+navigator.clipboard.writeText(generatedTrackingCode);
+}}
+title="Copy Tracking Reference"
+>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="18"
+  height="18"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+
+
+  </button>
+</div>
+
 
               <div className="custom-confirm-buttons success-confirm-buttons">
                 <button

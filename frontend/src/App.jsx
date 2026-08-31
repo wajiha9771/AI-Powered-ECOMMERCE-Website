@@ -8,6 +8,9 @@ import AdminProducts from "./admin/AdminProducts";
 import AdminOrders from "./admin/AdminOrders";
 import AdminAnalytics from "./admin/AdminAnalytics";
 import AdminMessages from "./admin/AdminMessages";
+import AdminLogin from "./admin/AdminLogin";
+import AdminForgotPassword from "./admin/AdminForgotPassword";
+import AdminResetPassword from "./admin/AdminResetPassword";
 
 import Navbar from "./components/Navbar";
 import HeroSlider from "./components/HeroSlider";
@@ -73,16 +76,20 @@ export default function App() {
             <Route path="/search" element={<SearchResults />} />
             <Route path="/profile" element={<UserProfileScreen />} />
 
-            <Route element={<AdminProtectedRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="cms" element={<AdminCMS />} />
-                <Route path="products" element={<AdminProducts />} />
-                <Route path="orders" element={<AdminOrders />} />
-                <Route path="analytics" element={<AdminAnalytics />} />
-                <Route path="messages" element={<AdminMessages />} />
-              </Route>
-            </Route>
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
+<Route path="/admin/reset-password" element={<AdminResetPassword />} />
+
+<Route element={<AdminProtectedRoute />}>
+<Route path="/admin/dashboard" element={<AdminLayout />}>
+<Route index element={<AdminDashboard />} />
+<Route path="cms" element={<AdminCMS />} />
+<Route path="products" element={<AdminProducts />} />
+<Route path="orders" element={<AdminOrders />} />
+<Route path="analytics" element={<AdminAnalytics />} />
+<Route path="messages" element={<AdminMessages />} />
+</Route>
+</Route>
           </Routes>
           {!isAdminRoute && <CartDrawer />}
           {!isAdminRoute && <AIShoppingAssistant />}

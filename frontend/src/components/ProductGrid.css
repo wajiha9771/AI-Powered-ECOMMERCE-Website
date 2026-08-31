@@ -32,7 +32,7 @@
   border-radius: 25px;
   object-fit: fill;
   overflow: hidden;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -55,7 +55,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.1s ease;
 }
 .product-badge {
   position: absolute;
@@ -84,8 +84,8 @@
   border-radius: 6px;
   cursor: pointer;
   transition:
-    bottom 0.3s ease,
-    background-color 0.2s ease;
+    bottom 0.1s ease,
+    background-color 0.1s ease;
   z-index: 2;
   text-transform: uppercase;
   font-size: 0.75rem;

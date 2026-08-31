@@ -23,24 +23,30 @@ export default function AdminLayout() {
           >
             ✕
           </button>
-          <Link to="/admin" className="admin-nav-link">
-            📊 OverView
-          </Link>
-          <Link to="/admin/products" className="admin-nav-link">
-            🛍️ Products (CRUD)
-          </Link>
-          <Link to="/admin/cms" className="admin-nav-link">
-            🎨 Store CMS & HeroSliders
-          </Link>
-          <Link to="/admin/orders" className="admin-nav-link">
-            📦 Orders & Tracking
-          </Link>
-          <Link to="/admin/messages" className="admin-nav-link">
-            💬 Contact Messages
-          </Link>
-          <Link to="/admin/analytics" className="admin-nav-link">
-            📈 AI & Click Analytics
-          </Link>
+         <Link to="/admin/dashboard" className="admin-nav-link">
+  📊 OverView
+</Link>
+
+          <Link to="/admin/dashboard/products" className="admin-nav-link">
+  🛍️ Products (CRUD)
+</Link>
+
+       <Link to="/admin/dashboard/cms" className="admin-nav-link">
+  🎨 Store CMS & HeroSliders
+</Link>
+
+         <Link to="/admin/dashboard/orders" className="admin-nav-link">
+  📦 Orders & Tracking
+</Link>
+
+          <Link to="/admin/dashboard/messages" className="admin-nav-link">
+  💬 Contact Messages
+</Link>
+
+        <Link to="/admin/dashboard/analytics" className="admin-nav-link">
+  📈 AI & Click Analytics
+</Link>
+
         </nav>
       </aside>
       <main className="admin-content">

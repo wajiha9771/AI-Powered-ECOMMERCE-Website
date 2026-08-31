@@ -7,7 +7,7 @@ import CartDrawer from "./CartDrawer";
 import DesktopSearchBar from "./DesktopSearchBar";
 import MobileSearchBar from "./MobileSearchBar";
 import "./Navbar.css";
-import logoIcon from "../assets/nex-style-.png";
+// import logoIcon from "../assets/nex-style-.png";
 
 function Navbar() {
   const { data: cmsData } = useCMS();
@@ -98,10 +98,10 @@ function Navbar() {
           </div>
         </div>
       )}
-      <nav className="navbar-container block w-full max-w-full h-[200px] bg-[#0f172a] box-border">
-        <div className="navbar-head w-full bg-[#1e1b4b] text-[#f3f4f6] text-center py-[10px] px-[16px] text-[13px] font-normal tracking-[1px] box-border font-['Poppins',_sans-serif]">
+      <nav className="navbar-container block w-full max-w-full h-[105px] bg-[#0f172a] box-border">
+        {/* <div className="navbar-head w-full bg-[#1e1b4b] text-[#f3f4f6] text-center py-[10px] px-[16px] text-[13px] font-normal tracking-[1px] box-border font-['Poppins',_sans-serif]">
           Welcome to{" "}
-          <span className="brand-highlight font-['Playfair_Display',_'Georgia',_serif] font-bold italic text-[#fbbf24] tracking-[0.5px] px-[4px]">
+          <span className="brand-highlight font-['Playfair_Display',_'Georgia',_serif] font-bold italic text-[rgb(179,195,217)] tracking-[0.5px] px-[4px]">
             Nex-Style
           </span>{" "}
           | Get{" "}
@@ -109,7 +109,7 @@ function Navbar() {
             10% OFF
           </span>{" "}
           on Your First Order 🛍️
-        </div>
+        </div> */}
 
         <div className="navbar-head1 w-full bg-[#e0e7ff] text-[#1e3a8a] py-[8px] px-0 text-[12px] font-[600] tracking-[0.5px] overflow-hidden flex">
           <div className="navbar-track flex whitespace-nowrap gap-[30px] animate-continuous-loop">
@@ -149,25 +149,25 @@ function Navbar() {
           <div className="navbar-desktop-container">
             <div className="navbar-top-row">
               <div className="navbar-logo">
-                <span className="logo-text text-[46px] font-semibold text-[#fbbf24] tracking-[0.5px]">
+                <span className="logo-text text-[40px] font-semibold text-[#38bdf8] tracking-[0.5px]">
                   {firstPart}
                 </span>
                 {nameParts.length > 1 && (
-                  <span className="logo-dash text-[46px] font-semibold text-[#38bdf8] px-[2px]">
+                  <span className="logo-dash text-[40px] font-semibold text-[#38bdf8] px-[2px]">
                     -
                   </span>
                 )}
-                <span className="logo-sub text-[46px] font-semibold text-[#fbbf24] tracking-[0.5px]">
+                <span className="logo-sub text-[40px] font-semibold text-[#38bdf8] tracking-[0.5px]">
                   {secondPart}
                 </span>
-                <span className="logo-icon">
-                  <img
+                {/* <span className="logo-icon"> */}
+                {/* <img
                     src={logoIcon}
                     alt="Nex Style Logo"
                     className="logo-img"
                   />
-                </span>
-                <div className="logo-lines text-[15px] font-light italic text-[#38bdf8] tracking-[0.5px] ml-[5px] mb-[5px]">
+                </span> } */}
+                <div className="logo-lines text-[12px] font-light italic text-[rgb(179,195,217)] tracking-[0.5px] ml-[5px] mb-[5px]">
                   {websiteSlogan}
                 </div>
               </div>
@@ -191,6 +191,107 @@ function Navbar() {
                   Accessories
                 </Link>
               </div>
+              <div className="cart-wrapper">
+                <button
+                  className="cart navbar-desktop-cart-btn"
+                  onClick={openDrawer}
+                  title="Shopping Cart"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    width="22"
+                    height="22"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+
+                  {totalItems > 0 && (
+                    <span className="cart-counter-badge">{totalItems}</span>
+                  )}
+                </button>
+
+                <Link
+                  to="/profile"
+                  className="profile navbar-desktop-cart-btn"
+                  style={{ textDecoration: "none" }}
+                  title="Profile"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    width="22"
+                    height="22"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </Link>
+
+                {userInfo ? (
+                  <button
+                    className="logout navbar-desktop-cart-btn nav-login-custom-btn"
+                    onClick={handleLogout}
+                    title="Logout"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      width="22"
+                      height="22"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                  </button>
+                ) : (
+                  <button
+                    className="navbar-desktop-cart-btn nav-login-custom-btn"
+                    onClick={() => (window.location.href = "/login")}
+                    title="Login"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      width="22"
+                      height="22"
+                    >
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                      <polyline points="10 17 15 12 10 7"></polyline>
+                      <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                  </button>
+                )}
+              </div>
+              <DesktopSearchBar
+                voiceText={voiceText}
+                setVoiceText={setVoiceText}
+                isListening={isListening}
+                handleVoiceSearch={handleVoiceSearch}
+                totalItems={totalItems}
+                openDrawer={openDrawer}
+                userInfo={userInfo}
+                handleLogout={handleLogout}
+              />
             </div>
 
             <div className="navbar-mobile-actions">
@@ -225,10 +326,11 @@ function Navbar() {
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
               </button>
-              <button
+                          <button
                 className="mobile-action-btn mobile-cart-badge-btn"
                 onClick={openDrawer}
                 title="Shopping Cart"
+                style={{ position: 'relative', overflow: 'visible' }}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -242,7 +344,33 @@ function Navbar() {
                   <circle cx="20" cy="21" r="1"></circle>
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
+                
+               {/* Counter Badge */}
+{totalItems > 0 && (
+  <span 
+    className="mobile-cart-counter"
+    style={{
+      position: 'absolute',
+      top: '-5px',
+      right: '-5px',
+      backgroundColor: '#38bdf8',
+      color: '#ffffff',
+      fontSize: '9px',
+      fontWeight: '700',
+      width: '14px',
+      height: '14px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 9999
+    }}
+  >
+    {totalItems}
+  </span>
+)}
               </button>
+
               <button
                 className="mobile-action-btn"
                 onClick={() => (window.location.href = "/login")}
@@ -277,7 +405,7 @@ function Navbar() {
                 <span></span>
               </button>
             </div>
-            <DesktopSearchBar
+            {/* <DesktopSearchBar
               voiceText={voiceText}
               setVoiceText={setVoiceText}
               isListening={isListening}
@@ -286,7 +414,7 @@ function Navbar() {
               openDrawer={openDrawer}
               userInfo={userInfo}
               handleLogout={handleLogout}
-            />
+            /> */}
           </div>
         </div>
 

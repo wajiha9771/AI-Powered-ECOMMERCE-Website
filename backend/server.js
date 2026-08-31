@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Nex-Style Voice Commerce API is officially running...");
+ app.get("/healthz", (req, res) => { res.status(200).json({ status: "ok" }); });
 });
 
 app.use("/api/products", productRoutes);
