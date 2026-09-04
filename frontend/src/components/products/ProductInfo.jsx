@@ -24,6 +24,7 @@ const ProductInfo = ({ product, selectedSize, setSelectedSize }) => {
       id: `${product.id}-${selectedSize}`,
       name: `${product.title} (${selectedSize})`,
       price: product.price,
+      stock: stock,
       images:
         product.images && product.images.length > 0
           ? [product.images[0]]
