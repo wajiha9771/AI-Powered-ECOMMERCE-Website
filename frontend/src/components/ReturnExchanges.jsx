@@ -3,7 +3,7 @@ export default function ReturnsExchanges() {
   return (
     <div className="policy-page-container max-w-[1200px] mx-auto py-[60px] px-[40px] font-['Poppins',sans-serif] max-[768px]:py-[30px] max-[768px]:px-[15px]">
       <header className="policy-hero-header text-center mb-[50px]">
-        <h1 className="policy-main-title text-[50px] font-[700] text-[rgb(28,9,94)] mb-[4px] max-[768px]:text-[32px]">
+        <h1 className="policy-main-title text-[50px] font-[700] text-[ rgb(13, 13, 13)] mb-[4px] max-[768px]:text-[32px]">
           Returns & Exchanges
         </h1>
         <p className="policy-subtitle text-[20px] text-[rgb(105,103,103)] max-w-[700px] mx-auto max-[768px]:text-[15px]">
@@ -12,8 +12,8 @@ export default function ReturnsExchanges() {
         </p>
       </header>
       <div className="policy-content-grid flex flex-col gap-[25px] max-w-[900px] mx-auto">
-        <div className="policy-text-card bg-[#e5e7ee] border-2 border-[#5e5c5c] rounded-[25px] p-[35px] max-[768px]:p-[22px]">
-          <h3 className="text-[22px] font-[700] text-[#050646] m-0 mb-[15px]">
+        <div className="policy-text-card border border-[#c9c9ca] bg-[rgb(219, 215, 215)]   rounded-[25px] p-[35px] max-[768px]:p-[22px]">
+          <h3 className="text-[22px] font-[700] text-[ rgb(13, 13, 13)] m-0 mb-[15px]">
             The 30-Day Nex-Style Guarantee 🔄
           </h3>
           <p className="text-[15px] text-[#5e5c5c] leading-[1.7] mb-[15px]">
@@ -36,8 +36,8 @@ export default function ReturnsExchanges() {
             </li>
           </ul>
         </div>
-        <div className="policy-text-card bg-[#e5e7ee] border-2 border-[#5e5c5c] rounded-[25px] p-[35px] max-[768px]:p-[22px]">
-          <h3 className="text-[22px] font-[700] text-[#050646] m-0 mb-[15px]">
+        <div className="policy-text-card  border border-[#c9c9ca] bg-[rgb(219, 215, 215)]   rounded-[25px] p-[35px] max-[768px]:p-[22px]">
+          <h3 className="text-[22px] font-[700] text-[ rgb(13, 13, 13)] m-0 mb-[15px]">
             How to Initiate a Return? 🛒
           </h3>
           <p className="text-[15px] text-[#5e5c5c] leading-[1.7] mb-[15px]">

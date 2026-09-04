@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 const fetchOrders = async () => {
- const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
   if (!response.ok) {
     throw new Error("Failed to fetch customer orders from the database.");
   }
@@ -8,7 +8,7 @@ const fetchOrders = async () => {
 };
 const updateOrderStatusAPI = async ({ orderId, status }) => {
   const response = await fetch(
-`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/status`,
+    `${import.meta.env.VITE_API_URL}/api/orders/${orderId}/status`,
     {
       method: "PUT",
       headers: {
@@ -22,37 +22,79 @@ const updateOrderStatusAPI = async ({ orderId, status }) => {
   }
   return response.json();
 };
+const cancelOrderAPI = async (orderId) => {
+  const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const token = storedUser.token;
+
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/orders/${orderId}/cancel`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to cancel order.");
+  }
+
+  return data;
+};
+
+export const useCancelOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: cancelOrderAPI,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["orders"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["userOrders"],
+      });
+    },
+  });
+};
 const deleteOrderAPI = async (orderId) => {
-const response = await fetch(
-`${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
-{
-method: "DELETE",
-},
-);
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
+    {
+      method: "DELETE",
+    },
+  );
 
-if (!response.ok) {
-throw new Error("Failed to delete the order.");
-}
+  if (!response.ok) {
+    throw new Error("Failed to delete the order.");
+  }
 
-return response.json();
+  return response.json();
 };
 
 export const useDeleteOrder = () => {
-const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-return useMutation({
-mutationFn: deleteOrderAPI,
-onSuccess: () => {
-queryClient.invalidateQueries({ queryKey: ["orders"] });
-},
-});
+  return useMutation({
+    mutationFn: deleteOrderAPI,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
 };
 
 export const useOrders = () => {
   return useQuery({
     queryKey: ["orders"],
     queryFn: fetchOrders,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 };
 export const useUpdateOrderStatus = () => {
@@ -65,23 +107,23 @@ export const useUpdateOrderStatus = () => {
   });
 };
 const createOrderAPI = async (newOrderData) => {
-const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
-const token = storedUser.token;
+  const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const token = storedUser.token;
 
-const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-Authorization: `Bearer ${token}`,
-},
-body: JSON.stringify(newOrderData),
-});
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(newOrderData),
+  });
 
-if (!response.ok) {
-throw new Error("Failed to create order asset from Database!");
-}
+  if (!response.ok) {
+    throw new Error("Failed to create order asset from Database!");
+  }
 
-return response.json();
+  return response.json();
 };
 
 export const useCreateOrder = () => {
@@ -99,7 +141,7 @@ export const useUserOrders = (userId) => {
     queryFn: async () => {
       if (!userId) return [];
       const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/api/orders/user/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/orders/user/${userId}`,
       );
 
       if (!response.ok) {

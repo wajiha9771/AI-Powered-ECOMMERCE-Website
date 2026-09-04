@@ -186,13 +186,13 @@ export default function AdminCMS() {
         <hr className="admin-divider border-none border-t border-[#686363] my-[10px]" />
 
         <div className="admin-social-links-section">
-          <h3 className="text-[20px] font-bold text-[#212c41] mb-2">
+          <h3 className="text-[20px] font-bold text-[#1d1d1e] mb-2">
             Social Media Links 🌐
           </h3>
           <p className="text-[15px] text-[rgb(105,103,103)] mb-4">
             Set the social media URLs that will be used in the website footer.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="social grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-group">
               <label>Facebook URL:</label>
               <input
@@ -245,7 +245,7 @@ export default function AdminCMS() {
         </div>
         <hr className="admin-divider border-none border-t border-[#686363] my-[10px]" />
         <div className="admin-payment-links-section">
-          <h3 className="text-[20px] font-bold text-[#212c41] mb-2">
+          <h3 className="text-[20px] font-bold  text-[#1d1d1e] mb-2">
             Payment Method Links 💳
           </h3>
           <p className="text-[15px] text-[rgb(105,103,103)] mb-4">
@@ -317,7 +317,7 @@ export default function AdminCMS() {
         </div>
         {sliders.map((slide, index) => (
           <div key={index} className="admin-slide-card border p-4 rounded mb-4">
-            <h4 className="admin-slide-title m-0 text-[18px] font-bold text-[rgb(28,9,94)]">
+            <h4 className="admin-slide-title m-0 text-[18px] font-bold text-[rgb(12 12 12)]">
               Slide #{index + 1}
             </h4>
             <div className="admin-image-upload-box">

@@ -10,8 +10,10 @@ export default function PrivacyTerms() {
         </p>
       </header>
       <div className="policy-content-grid">
-        <div className="policy-text-card">
-          <h3>Data Protection & Sovereignty 🔒</h3>
+        <div className="policy-text-card border border-[#c9c9ca] bg-[rgb(219, 215, 215)]  m-[15px] rounded-[25px] p-[35px] max-[768px]:p-[22px]">
+          <h3 className="text-[22px] font-[700] text-[ rgb(13, 13, 13)] m-0 mb-[15px]">
+            Data Protection & Sovereignty 🔒
+          </h3>
           <p>
             At Nex-Style, your identity security is handled at the absolute core
             level. Any credentials processing through our platform checkout
@@ -25,7 +27,7 @@ export default function PrivacyTerms() {
             transactions remain completely uncompromised.
           </p>
         </div>
-        <div className="policy-text-card">
+        <div className="policy-text-card border border-[#c9c9ca] bg-[rgb(219, 215, 215)]   rounded-[25px] m-[15px] p-[35px] max-[768px]:p-[22px]">
           <h3>Cookie Custom Preferences 🍪</h3>
           <p>
             Our active platform architecture uses essential analytical data

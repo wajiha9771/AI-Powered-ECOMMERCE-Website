@@ -1,5 +1,9 @@
 import React from "react";
-import { useOrders, useUpdateOrderStatus,useDeleteOrder } from "../hooks/useOrders";
+import {
+  useOrders,
+  useUpdateOrderStatus,
+  useDeleteOrder,
+} from "../hooks/useOrders";
 import "./AdminLayout.css";
 
 export default function AdminOrders() {
@@ -17,18 +21,17 @@ export default function AdminOrders() {
     );
   };
   const handleDeleteOrder = (orderId) => {
-const confirmDelete = window.confirm(
-"Are you sure you want to delete this order?"
-);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this order?",
+    );
 
-if (!confirmDelete) return;
+    if (!confirmDelete) return;
 
-deleteOrderMutation.mutate(orderId, {
-onSuccess: () => alert("Order deleted successfully! ✅"),
-onError: (err) => alert(`Error deleting order: ${err.message}`),
-});
-};
-
+    deleteOrderMutation.mutate(orderId, {
+      onSuccess: () => alert("Order deleted successfully! ✅"),
+      onError: (err) => alert(`Error deleting order: ${err.message}`),
+    });
+  };
 
   if (isLoading)
     return <div className="admin-loading">Loading Customer Orders... ⏳</div>;
@@ -103,27 +106,24 @@ onError: (err) => alert(`Error deleting order: ${err.message}`),
                     <option value="Delivered">Delivered</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
-                <button
-type="button"
-style={{
-backgroundColor: "#fee2e2",
-color: "#dc2626",
-fontSize: "12px",
-fontWeight: "600",
-padding: "6px 12px",
-border: "none",
-borderRadius: "6px",
-cursor: "pointer",
-marginTop: "8px",
-marginLeft: "8px",
-}}
-onClick={() => handleDeleteOrder(order._id)}
-
->
-
-Delete </button>
-
-
+                  <button
+                    type="button"
+                    style={{
+                      backgroundColor: "#fee2e2",
+                      color: "#dc2626",
+                      fontSize: "12px",
+                      fontWeight: "600",
+                      padding: "6px 12px",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      marginTop: "8px",
+                      marginLeft: "8px",
+                    }}
+                    onClick={() => handleDeleteOrder(order._id)}
+                  >
+                    Delete{" "}
+                  </button>
                 </td>
               </tr>
             ))}

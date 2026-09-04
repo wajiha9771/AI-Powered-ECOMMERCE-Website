@@ -6,7 +6,7 @@ export default function AdminLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="admin-container flex h-screen bg-[#f1f2f6] font-sans">
-      <aside className="admin-sidebar w-[260px] bg-[#24334d] flex flex-col">
+      <aside className="admin-sidebar w-[260px] bg-[#1a1a1a] flex flex-col">
         <div className="admin-brand">
           <h2>
             Nex-Style <span className="text-[#38bdf8] text-[16px]">Admin</span>
@@ -23,30 +23,29 @@ export default function AdminLayout() {
           >
             ✕
           </button>
-         <Link to="/admin/dashboard" className="admin-nav-link">
-  📊 OverView
-</Link>
+          <Link to="/admin/dashboard" className="admin-nav-link">
+            📊 OverView
+          </Link>
 
           <Link to="/admin/dashboard/products" className="admin-nav-link">
-  🛍️ Products (CRUD)
-</Link>
+            🛍️ Products (CRUD)
+          </Link>
 
-       <Link to="/admin/dashboard/cms" className="admin-nav-link">
-  🎨 Store CMS & HeroSliders
-</Link>
+          <Link to="/admin/dashboard/cms" className="admin-nav-link">
+            🎨 Store CMS & HeroSliders
+          </Link>
 
-         <Link to="/admin/dashboard/orders" className="admin-nav-link">
-  📦 Orders & Tracking
-</Link>
+          <Link to="/admin/dashboard/orders" className="admin-nav-link">
+            📦 Orders & Tracking
+          </Link>
 
           <Link to="/admin/dashboard/messages" className="admin-nav-link">
-  💬 Contact Messages
-</Link>
+            💬 Contact Messages
+          </Link>
 
-        <Link to="/admin/dashboard/analytics" className="admin-nav-link">
-  📈 AI & Click Analytics
-</Link>
-
+          <Link to="/admin/dashboard/analytics" className="admin-nav-link">
+            📈 AI & Click Analytics
+          </Link>
         </nav>
       </aside>
       <main className="admin-content">
@@ -59,7 +58,7 @@ export default function AdminLayout() {
           </button>
 
           <h2>Nex-Style</h2>
-          <span className="admin-badge-role bg-[#e8f4fd] text-[#0984e3] px-[12px] py-[5px] rounded-[20px] text-[13.6px] font-semibold">
+          <span className="admin-badge-role bg-[#e8f4fd] text-[#000000] px-[12px] py-[5px] rounded-[20px] text-[13.6px] font-semibold">
             Owner
           </span>
         </header>

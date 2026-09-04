@@ -2,45 +2,36 @@ import { GoogleGenAI } from "@google/genai";
 import Product from "../models/Product.js";
 
 const ai = new GoogleGenAI({
-apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 const escapeRegex = (value) => {
-return String(value).replace(/[.*+?^${}()|[]\]/g, "\$&");
+  return String(value).replace(/[.*+?^${}()|[]\]/g, "\$&");
 };
 
 export const aiChat = async (req, res) => {
-try {
-const { message } = req.body;
+  try {
+    const { message } = req.body;
 
+    if (!message || !message.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a message.",
+      });
+    }
+    const databaseCategories = await Product.distinct("category");
 
-if (!message || !message.trim()) {
-  return res.status(400).json({
-    success: false,
-    message: "Please provide a message.",
-  });
-}
+    const availableCategories = databaseCategories
+      .filter(Boolean)
+      .map((category) => String(category).toLowerCase().trim())
+      .filter(Boolean);
 
-/*
- * Get the real categories from the database.
- *
- * This prevents the AI from guessing categories such as
- * "heels", "shirt", "jeans", etc. when those exact values
- * may not exist in the database.
- */
-const databaseCategories = await Product.distinct("category");
+    const categoryList =
+      availableCategories.length > 0
+        ? availableCategories.join(", ")
+        : "No product categories are currently available.";
 
-const availableCategories = databaseCategories
-  .filter(Boolean)
-  .map((category) => String(category).toLowerCase().trim())
-  .filter(Boolean);
-
-const categoryList =
-  availableCategories.length > 0
-    ? availableCategories.join(", ")
-    : "No product categories are currently available.";
-
-const prompt = `
+    const prompt = `
 
 
 You are Nex AI, the official AI Shopping Assistant for Nex-Style,
@@ -527,206 +518,180 @@ User message:
 ${message}
 `;
 
-
-const aiResponse = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
-  contents: prompt,
-  config: {
-    responseMimeType: "application/json",
-    responseSchema: {
-      type: "object",
-      properties: {
-        intent: {
-          type: "string",
-          enum: ["conversation", "product_search"],
-        },
-        reply: {
-          type: "string",
-        },
-        category: {
-          type: "string",
-        },
-        color: {
-          type: "string",
-        },
-        maxPrice: {
-          type: ["number", "null"],
-        },
-        minPrice: {
-          type: ["number", "null"],
-        },
-        keywords: {
-          type: "array",
-          items: {
-            type: "string",
+    const aiResponse = await ai.models.generateContent({
+      model: "gemini-3.6-flash",
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            intent: {
+              type: "string",
+              enum: ["conversation", "product_search"],
+            },
+            reply: {
+              type: "string",
+            },
+            category: {
+              type: "string",
+            },
+            color: {
+              type: "string",
+            },
+            maxPrice: {
+              type: ["number", "null"],
+            },
+            minPrice: {
+              type: ["number", "null"],
+            },
+            keywords: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+            },
           },
+          required: [
+            "intent",
+            "reply",
+            "category",
+            "color",
+            "maxPrice",
+            "minPrice",
+            "keywords",
+          ],
         },
       },
-      required: [
-        "intent",
-        "reply",
-        "category",
-        "color",
-        "maxPrice",
-        "minPrice",
-        "keywords",
-      ],
-    },
-  },
-});
+    });
 
-let filters;
+    let filters;
 
-try {
-  filters = JSON.parse(aiResponse.text);
-} catch (error) {
-  console.error("AI JSON Parse Error:", error);
+    try {
+      filters = JSON.parse(aiResponse.text);
+    } catch (error) {
+      console.error("AI JSON Parse Error:", error);
 
-  return res.status(500).json({
-    success: false,
-    message: "AI response could not be processed.",
-    error: aiResponse.text,
-  });
-}
+      return res.status(500).json({
+        success: false,
+        message: "AI response could not be processed.",
+        error: aiResponse.text,
+      });
+    }
 
-if (filters.intent === "conversation") {
-  return res.status(200).json({
-    success: true,
-    message,
-    filters,
-    reply: filters.reply,
-    products: [],
-    count: 0,
-  });
-}
+    if (filters.intent === "conversation") {
+      return res.status(200).json({
+        success: true,
+        message,
+        filters,
+        reply: filters.reply,
+        products: [],
+        count: 0,
+      });
+    }
 
-const query = {
-  stock: { $gt: 0 },
-};
+    const query = {
+      stock: { $gt: 0 },
+    };
 
-if (filters.maxPrice !== null && filters.maxPrice !== undefined) {
-  query.price = {
-    ...(query.price || {}),
-    $lte: Number(filters.maxPrice),
-  };
-}
+    if (filters.maxPrice !== null && filters.maxPrice !== undefined) {
+      query.price = {
+        ...(query.price || {}),
+        $lte: Number(filters.maxPrice),
+      };
+    }
 
-if (filters.minPrice !== null && filters.minPrice !== undefined) {
-  query.price = {
-    ...(query.price || {}),
-    $gte: Number(filters.minPrice),
-  };
-}
+    if (filters.minPrice !== null && filters.minPrice !== undefined) {
+      query.price = {
+        ...(query.price || {}),
+        $gte: Number(filters.minPrice),
+      };
+    }
 
-const andConditions = [];
+    const andConditions = [];
 
-/*
- * CATEGORY SEARCH
- *
- * The AI receives the real database categories, so category should
- * normally already be an actual category from the database.
- *
- * We still use case-insensitive regex so the query remains safe if
- * capitalization differs.
- */
-if (filters.category && filters.category.trim()) {
-  const categoryRegex = new RegExp(
-    escapeRegex(filters.category.trim()),
-    "i",
-  );
+    // Category Search
 
-  andConditions.push({
-    category: categoryRegex,
-  });
-}
-
-/*
- * COLOR SEARCH
- *
- * Search color across all useful product fields.
- */
-if (filters.color && filters.color.trim()) {
-  const colorRegex = new RegExp(
-    escapeRegex(filters.color.trim()),
-    "i",
-  );
-
-  andConditions.push({
-    $or: [
-      { name: colorRegex },
-      { nameSearchable: colorRegex },
-      { description: colorRegex },
-      { tags: colorRegex },
-    ],
-  });
-}
-
-/*
- * KEYWORD SEARCH
- *
- * All product-type keywords are combined inside ONE $or.
- *
- * This prevents a product from being rejected simply because the AI
- * returned more than one related keyword.
- */
-if (Array.isArray(filters.keywords) && filters.keywords.length > 0) {
-  const validKeywords = filters.keywords
-    .filter((keyword) => keyword && String(keyword).trim())
-    .map((keyword) => String(keyword).trim());
-
-  if (validKeywords.length > 0) {
-    const keywordConditions = validKeywords.map((keyword) => {
-      const keywordRegex = new RegExp(
-        escapeRegex(keyword),
+    if (filters.category && filters.category.trim()) {
+      const categoryRegex = new RegExp(
+        escapeRegex(filters.category.trim()),
         "i",
       );
 
-      return {
-        $or: [
-          { name: keywordRegex },
-          { nameSearchable: keywordRegex },
-          { description: keywordRegex },
-          { tags: keywordRegex },
-        ],
-      };
-    });
+      andConditions.push({
+        category: categoryRegex,
+      });
+    }
 
-    andConditions.push({
-      $or: keywordConditions,
+    //  COLOR SEARCH
+
+    if (filters.color && filters.color.trim()) {
+      const colorRegex = new RegExp(escapeRegex(filters.color.trim()), "i");
+
+      andConditions.push({
+        $or: [
+          { name: colorRegex },
+          { nameSearchable: colorRegex },
+          { description: colorRegex },
+          { tags: colorRegex },
+        ],
+      });
+    }
+    // KEYWORD SEARCH
+
+    if (Array.isArray(filters.keywords) && filters.keywords.length > 0) {
+      const validKeywords = filters.keywords
+        .filter((keyword) => keyword && String(keyword).trim())
+        .map((keyword) => String(keyword).trim());
+
+      if (validKeywords.length > 0) {
+        const keywordConditions = validKeywords.map((keyword) => {
+          const keywordRegex = new RegExp(escapeRegex(keyword), "i");
+
+          return {
+            $or: [
+              { name: keywordRegex },
+              { nameSearchable: keywordRegex },
+              { description: keywordRegex },
+              { tags: keywordRegex },
+            ],
+          };
+        });
+
+        andConditions.push({
+          $or: keywordConditions,
+        });
+      }
+    }
+
+    if (andConditions.length > 0) {
+      query.$and = andConditions;
+    }
+
+    const products = await Product.find(query)
+      .sort({
+        isFeatured: -1,
+        isTrending: -1,
+        createdAt: -1,
+      })
+      .limit(12);
+
+    return res.status(200).json({
+      success: true,
+      message,
+      filters,
+      reply: filters.reply,
+      products,
+      count: products.length,
+    });
+  } catch (error) {
+    console.error("AI Chat Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Error in AI assistant",
+      error: error.message,
+      stack: error.stack,
     });
   }
-}
-
-if (andConditions.length > 0) {
-  query.$and = andConditions;
-}
-
-const products = await Product.find(query)
-  .sort({
-    isFeatured: -1,
-    isTrending: -1,
-    createdAt: -1,
-  })
-  .limit(12);
-
-return res.status(200).json({
-  success: true,
-  message,
-  filters,
-  reply: filters.reply,
-  products,
-  count: products.length,
-});
-
-
-} catch (error) {
-console.error("AI Chat Error:", error);
-
-return res.status(500).json({
-success: false,
-message: "Error in AI assistant",
-error: error.message,
-stack: error.stack,
-});
-}
 };

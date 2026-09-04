@@ -10,6 +10,7 @@ import "./ProductDetail.css";
 const ProductDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+
   const {
     data: products,
     isLoading: isProductsLoading,
@@ -17,11 +18,13 @@ const ProductDetail = () => {
   } = useProducts();
 
   const { mutate: trackEvent } = useTrackEvent();
+
   const [selectedSize, setSelectedSize] = useState("");
   const [formattedProduct, setFormattedProduct] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     if (products) {
       const foundProduct = products.find(
         (p) => p._id === id || p.id === parseInt(id),
@@ -29,25 +32,41 @@ const ProductDetail = () => {
 
       if (foundProduct) {
         setSelectedSize("");
+
         const formatted = {
           id: foundProduct._id || foundProduct.id,
           title: foundProduct.name,
           name: foundProduct.name,
+
           price:
             typeof foundProduct.price === "number"
               ? foundProduct.price
               : parseFloat(foundProduct.price?.replace("$", "") || 0),
+
           description:
             foundProduct.description ||
             `Premium engineered ${foundProduct.name} from the elite ${foundProduct.category}. Designed with climate-adaptive fibers and futuristic aesthetics tailored for Nex-Style.`,
+
           images: foundProduct.images,
+
           sizes: ["XS", "S", "M", "L", "XL"],
+
+          // INVENTORY / STOCK
+
+          stock:
+            foundProduct.stock !== undefined && foundProduct.stock !== null
+              ? Number(foundProduct.stock)
+              : 0,
         };
+
         setFormattedProduct(formatted);
+
         trackEvent({
           eventType: "view",
           target: foundProduct.name,
-          meta: `Product detail viewed | Product ID: ${foundProduct._id || foundProduct.id}`,
+          meta: `Product detail viewed | Product ID: ${
+            foundProduct._id || foundProduct.id
+          }`,
         });
       } else {
         setFormattedProduct(null);
@@ -68,6 +87,7 @@ const ProductDetail = () => {
       </div>
     );
   }
+
   if (isError || !formattedProduct) {
     return (
       <div
@@ -79,9 +99,7 @@ const ProductDetail = () => {
         }}
       >
         <h2>Product Not Found</h2>
-        <p>
-        Unable to load Product.
-        </p>
+        <p>Unable to load Product.</p>
       </div>
     );
   }
@@ -95,6 +113,7 @@ const ProductDetail = () => {
             title={formattedProduct.title}
           />
         </div>
+
         <div className="right-info-span">
           <ProductInfo
             product={formattedProduct}

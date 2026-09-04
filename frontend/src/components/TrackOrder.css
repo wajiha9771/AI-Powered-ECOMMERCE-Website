@@ -16,7 +16,7 @@
 .track-main-title {
   font-size: 50px;
   font-weight: 700;
-  color: rgb(28, 9, 94);
+  color: rgb(10, 10, 10);
   margin-bottom: 4px;
 }
 
@@ -51,7 +51,7 @@
 .track-input-group label {
   font-size: 14px;
   font-weight: 600;
-  color: #050646;
+  color: #040404;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -67,12 +67,12 @@
 }
 
 .track-input-group input:focus {
-  border-color: #060757;
+  border-color: #0d0d0d;
   box-shadow: 0 0 8px rgba(6, 7, 87, 0.15);
 }
 
 .track-submit-btn {
-  background-color: #060757;
+  background-color: #101010;
   color: #fff;
   border: none;
   padding: 14px;
@@ -86,7 +86,7 @@
 }
 
 .track-submit-btn:hover {
-  background-color: #1c095e;
+  background-color: #0d0d0e;
 }
 
 .tracking-status-display-box {
@@ -109,16 +109,16 @@
 
 .status-summary-header h3 {
   font-size: 20px;
-  color: #050646;
+  color: #060606;
   margin: 0;
 }
 
 .status-summary-header h3 span {
-  color: #0ea5e9;
+  color: #4e4f4f;
 }
 
 .status-badge-active {
-  background: #080aa0;
+  background: #000000;
   color: #fff;
   padding: 6px 14px;
   font-size: 13px;

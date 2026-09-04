@@ -14,8 +14,10 @@ import AdminResetPassword from "./admin/AdminResetPassword";
 
 import Navbar from "./components/Navbar";
 import HeroSlider from "./components/HeroSlider";
+import ServiceFeatures from "./components/ServiceFeatures";
 import ProductGrid from "./components/ProductGrid";
 import TrendingGrid from "./components/TrendingGrid";
+import FeaturesBanner from "./components/FeaturesBanner";
 import SearchResults from "./components/SearchResults";
 import Footer from "./components/Footer";
 import NewArrivals from "./components/NewArrivals";
@@ -35,6 +37,10 @@ import { GlobalStateProvider } from "./components/GlobalStateContext";
 import { CartProvider, useCart } from "./components/CartContext";
 import UserProfileScreen from "./components/UserProfileScreen";
 import AIShoppingAssistant from "./components/AIShoppingAssistant";
+import CheckoutSuccess from "./components/CheckoutSuccess";
+import Invoice from "./components/Invoice";
+import WebSocketProvider from "./components/WebSocketProvider";
+import NotificationProvider from "./components/NotificationContext";
 
 const FooterWrapper = () => {
   const { openDrawerWithTab } = useCart();
@@ -45,57 +51,71 @@ export default function App() {
   const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <GlobalStateProvider>
-      <CartProvider>
-        <div>
-          {!isAdminRoute && <Navbar />}
+      <WebSocketProvider>
+        <NotificationProvider>
+          <CartProvider>
+            <div>
+              {!isAdminRoute && <Navbar />}
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <HeroSlider />
-                  <ProductGrid />
-                  <TrendingGrid />
-                </>
-              }
-            />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <HeroSlider />
+                      <ServiceFeatures />
+                      <ProductGrid />
+                      <TrendingGrid />
+                    </>
+                  }
+                />
 
-            <Route path="/new-arrivals" element={<NewArrivals />} />
-            <Route path="/category/men" element={<Men />} />
-            <Route path="/category/women" element={<Women />} />
-            <Route path="/category/kids" element={<Kids />} />
-            <Route path="/category/accessories" element={<Accessories />} />
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/returns" element={<ReturnExchanges />} />
-            <Route path="/privacy" element={<PrivacyTerms />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/profile" element={<UserProfileScreen />} />
+                <Route path="/new-arrivals" element={<NewArrivals />} />
+                <Route path="/category/men" element={<Men />} />
+                <Route path="/category/women" element={<Women />} />
+                <Route path="/category/kids" element={<Kids />} />
+                <Route path="/category/accessories" element={<Accessories />} />
+                <Route path="/login" element={<LoginScreen />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faqs" element={<FAQs />} />
+                <Route path="/returns" element={<ReturnExchanges />} />
+                <Route path="/privacy" element={<PrivacyTerms />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/search" element={<SearchResults />} />
+                <Route path="/profile" element={<UserProfileScreen />} />
+                <Route path="/checkout-success" element={<CheckoutSuccess />} />
+                <Route path="/invoice/:orderId" element={<Invoice />} />
 
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
-<Route path="/admin/reset-password" element={<AdminResetPassword />} />
+                <Route path="/admin" element={<AdminLogin />} />
+                <Route
+                  path="/admin/forgot-password"
+                  element={<AdminForgotPassword />}
+                />
+                <Route
+                  path="/admin/reset-password"
+                  element={<AdminResetPassword />}
+                />
 
-<Route element={<AdminProtectedRoute />}>
-<Route path="/admin/dashboard" element={<AdminLayout />}>
-<Route index element={<AdminDashboard />} />
-<Route path="cms" element={<AdminCMS />} />
-<Route path="products" element={<AdminProducts />} />
-<Route path="orders" element={<AdminOrders />} />
-<Route path="analytics" element={<AdminAnalytics />} />
-<Route path="messages" element={<AdminMessages />} />
-</Route>
-</Route>
-          </Routes>
-          {!isAdminRoute && <CartDrawer />}
-          {!isAdminRoute && <AIShoppingAssistant />}
-          {!isAdminRoute && <FooterWrapper />}
-        </div>
-      </CartProvider>
+                <Route element={<AdminProtectedRoute />}>
+                  <Route path="/admin/dashboard" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="cms" element={<AdminCMS />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="orders" element={<AdminOrders />} />
+                    <Route path="analytics" element={<AdminAnalytics />} />
+                    <Route path="messages" element={<AdminMessages />} />
+                  </Route>
+                </Route>
+              </Routes>
+              {!isAdminRoute && <CartDrawer />}
+              {!isAdminRoute && <AIShoppingAssistant />}
+              {!isAdminRoute && <FeaturesBanner />}
+              {!isAdminRoute && <FooterWrapper />}
+            </div>
+          </CartProvider>
+        </NotificationProvider>
+      </WebSocketProvider>
     </GlobalStateProvider>
   );
 }

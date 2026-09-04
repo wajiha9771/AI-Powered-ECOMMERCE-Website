@@ -11,8 +11,9 @@ export default function AdminProducts() {
   const { data: products, isLoading, isError, error } = useProducts();
   const addProductMutation = useAddProduct();
   const updateProductMutation = useUpdateProduct();
-  const [editingProductId, setEditingProductId] = useState(null);
   const deleteProductMutation = useDeleteProduct();
+
+  const [editingProductId, setEditingProductId] = useState(null);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -22,6 +23,7 @@ export default function AdminProducts() {
   const [images, setImages] = useState([""]);
   const [rawImageFiles, setRawImageFiles] = useState([null]);
   const [description, setDescription] = useState("");
+  const [stock, setStock] = useState("10");
   const [isFeatured, setIsFeatured] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
 
@@ -33,45 +35,68 @@ export default function AdminProducts() {
 
   const handleProductFileSelection = (index, fileObject) => {
     if (!fileObject) return;
+
     const localPreviewUrl = URL.createObjectURL(fileObject);
+
     const updatedImages = [...images];
     updatedImages[index] = localPreviewUrl;
     setImages(updatedImages);
+
     const updatedFiles = [...rawImageFiles];
     updatedFiles[index] = fileObject;
     setRawImageFiles(updatedFiles);
   };
+
   const handleAddImageField = () => {
     setImages([...images, ""]);
     setRawImageFiles([...rawImageFiles, null]);
   };
+
   const handleRemoveImageField = (index) => {
     setImages(images.filter((_, i) => i !== index));
     setRawImageFiles(rawImageFiles.filter((_, i) => i !== index));
   };
+
   const handleEditClick = (product) => {
     setEditingProductId(product._id);
+
     setName(product.name);
     setPrice(product.price.toString());
     setOldPrice(product.oldPrice ? product.oldPrice.toString() : "");
     setCategory(product.category);
     setBadge(product.badge || "");
+
     setImages(
       product.images && product.images.length > 0 ? product.images : [""],
     );
+
     setRawImageFiles(
       product.images && product.images.length > 0
         ? new Array(product.images.length).fill(null)
         : [null],
     );
+
     setDescription(product.description || "");
+
+    // Load existing stock when editing
+    setStock(
+      product.stock !== undefined && product.stock !== null
+        ? product.stock.toString()
+        : "0",
+    );
+
     setIsFeatured(product.isFeatured || false);
     setIsTrending(product.isTrending || false);
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
+
   const handleCancelEdit = () => {
     setEditingProductId(null);
+
     setName("");
     setPrice("");
     setOldPrice("");
@@ -80,9 +105,11 @@ export default function AdminProducts() {
     setImages([""]);
     setRawImageFiles([null]);
     setDescription("");
+    setStock("10");
     setIsFeatured(false);
     setIsTrending(false);
   };
+
   const handleDelete = (productId) => {
     if (
       window.confirm(
@@ -95,21 +122,44 @@ export default function AdminProducts() {
       });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const validatedImages = images.filter(
       (url) => url.trim() !== "" && !url.startsWith("blob:"),
     );
+
+    const numericStock = Number(stock);
+
+    if (!Number.isInteger(numericStock) || numericStock < 0) {
+      alert("Stock must be a whole number equal to or greater than 0.");
+      return;
+    }
+
     const formData = new FormData();
+
     formData.append("name", name.trim());
     formData.append("price", Number(price));
-    if (oldPrice) formData.append("oldPrice", Number(oldPrice));
+
+    if (oldPrice) {
+      formData.append("oldPrice", Number(oldPrice));
+    }
+
     formData.append("category", category.toLowerCase());
-    if (badge) formData.append("badge", badge.trim());
+
+    if (badge) {
+      formData.append("badge", badge.trim());
+    }
+
     formData.append("description", description.trim());
-    formData.append("stock", 10);
+
+    // Actual inventory stock
+    formData.append("stock", numericStock);
+
     formData.append("isFeatured", isFeatured);
     formData.append("isTrending", isTrending);
+
     formData.append(
       "tags",
       JSON.stringify([name.trim().toLowerCase(), category.toLowerCase()]),
@@ -118,6 +168,7 @@ export default function AdminProducts() {
     if (validatedImages.length > 0) {
       formData.append("images", JSON.stringify(validatedImages));
     }
+
     if (rawImageFiles && rawImageFiles.length > 0) {
       rawImageFiles.forEach((file) => {
         if (file) {
@@ -125,9 +176,13 @@ export default function AdminProducts() {
         }
       });
     }
+
     if (editingProductId) {
       updateProductMutation.mutate(
-        { id: editingProductId, updatedData: formData },
+        {
+          id: editingProductId,
+          updatedData: formData,
+        },
         {
           onSuccess: () => {
             alert("Product updated successfully! ");
@@ -147,17 +202,22 @@ export default function AdminProducts() {
     }
   };
 
-  if (isLoading)
+  if (isLoading) {
     return <div className="admin-loading">Loading Store Inventory... ⏳</div>;
-  if (isError)
+  }
+
+  if (isError) {
     return <div className="admin-error">Error: {error.message} ❌</div>;
+  }
 
   return (
     <div className="admin-products-page">
       <h2>Products Inventory Management</h2>
+
       <p className="admin-subtitle">
         Create new product cards or monitor current active listing stocks.
       </p>
+
       <form onSubmit={handleSubmit} className="admin-form" noValidate>
         <div className="admin-form-header-row">
           <h3>
@@ -165,6 +225,7 @@ export default function AdminProducts() {
               ? "Edit Product Configuration ✏️"
               : "Add New Product Asset "}
           </h3>
+
           {editingProductId && (
             <button
               type="button"
@@ -179,6 +240,7 @@ export default function AdminProducts() {
         <div className="admin-grid">
           <div className="form-group">
             <label>Product Name *</label>
+
             <input
               type="text"
               value={name}
@@ -187,8 +249,10 @@ export default function AdminProducts() {
               placeholder="e.g., Slim Fit Cotton Linen Shirt"
             />
           </div>
+
           <div className="form-group">
             <label>Category Selection *</label>
+
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -206,6 +270,7 @@ export default function AdminProducts() {
         <div className="admin-grid">
           <div className="form-group">
             <label>Price ($ Pure Numbers Only) *</label>
+
             <input
               type="number"
               step="0.01"
@@ -215,8 +280,10 @@ export default function AdminProducts() {
               placeholder="e.g., 49.99"
             />
           </div>
+
           <div className="form-group">
             <label>Old Price (Optional Strikethrough Sale)</label>
+
             <input
               type="number"
               step="0.01"
@@ -227,8 +294,38 @@ export default function AdminProducts() {
           </div>
         </div>
 
+        {/* =============================== */}
+        {/* INVENTORY STOCK */}
+        {/* =============================== */}
+
+        <div className="form-group">
+          <label>Available Stock *</label>
+
+          <input
+            type="number"
+            min="0"
+            step="1"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+            required
+            placeholder="e.g., 25"
+          />
+
+          <small
+            style={{
+              display: "block",
+              marginTop: "6px",
+              color: "#6b7280",
+              fontSize: "12px",
+            }}
+          >
+            Enter the number of units currently available.
+          </small>
+        </div>
+
         <div className="form-group">
           <label>Badge Label Text (Optional)</label>
+
           <input
             type="text"
             value={badge}
@@ -236,6 +333,7 @@ export default function AdminProducts() {
             placeholder="e.g., New, Sale 20%, Hot, New Drop"
           />
         </div>
+
         <div className="form-group">
           <div
             className="image-stack-header"
@@ -247,6 +345,7 @@ export default function AdminProducts() {
             }}
           >
             <label>Product Image Assets Configuration *</label>
+
             <button
               type="button"
               className="btn-secondary"
@@ -277,11 +376,15 @@ export default function AdminProducts() {
                   >
                     Picture Asset #{index + 1} {index === 0 && "*"}
                   </span>
+
                   {index > 0 && (
                     <button
                       type="button"
                       className="btn-danger-sm"
-                      style={{ padding: "2px 8px", fontSize: "11px" }}
+                      style={{
+                        padding: "2px 8px",
+                        fontSize: "11px",
+                      }}
                       onClick={() => handleRemoveImageField(index)}
                     >
                       Remove Slot 🗑️
@@ -289,11 +392,11 @@ export default function AdminProducts() {
                   )}
                 </div>
 
-                {/* Image URL */}
                 <div>
                   <span className="admin-upload-option-label">
                     Option A: Paste Image URL
                   </span>
+
                   <input
                     type="text"
                     value={url && url.startsWith("blob:") ? "" : url}
@@ -302,21 +405,24 @@ export default function AdminProducts() {
                     className="admin-url-input-field"
                   />
                 </div>
+
                 <div className="admin-upload-divider">
                   <hr />
                   <span>OR</span>
                   <hr />
                 </div>
-                {/* Choose File Input */}
+
                 <div>
                   <span className="admin-upload-option-label">
                     Option B: Upload from Computer
                   </span>
+
                   <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => {
                       const file = e.target.files[0];
+
                       if (file) {
                         handleProductFileSelection(index, file);
                       }
@@ -324,6 +430,7 @@ export default function AdminProducts() {
                     className="admin-file-input-field"
                   />
                 </div>
+
                 {url && (
                   <div className="admin-preview-wrapper">
                     <span
@@ -332,6 +439,7 @@ export default function AdminProducts() {
                     >
                       Image Preview:
                     </span>
+
                     <img
                       src={url}
                       alt={`Preview ${index + 1}`}
@@ -345,8 +453,10 @@ export default function AdminProducts() {
               </div>
             ))}
         </div>
+
         <div className="form-group" style={{ marginTop: "15px" }}>
           <label>Product Specification Summary Description</label>
+
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -354,6 +464,7 @@ export default function AdminProducts() {
             rows="3"
           ></textarea>
         </div>
+
         <div className="checkbox-stack">
           <label className="checkbox-label">
             <input
@@ -363,6 +474,7 @@ export default function AdminProducts() {
             />
             Display on Homepage (Featured Grid) ⭐️
           </label>
+
           <label className="checkbox-label">
             <input
               type="checkbox"
@@ -372,6 +484,7 @@ export default function AdminProducts() {
             Display on Trending Section 🔥
           </label>
         </div>
+
         <button
           type="submit"
           className="btn-success-full"
@@ -388,7 +501,9 @@ export default function AdminProducts() {
               : "Save Product "}
         </button>
       </form>
+
       <h3>Active Products Listing ({products?.length || 0})</h3>
+
       <div className="admin-table-container">
         <table className="admin-data-table">
           <thead>
@@ -396,24 +511,65 @@ export default function AdminProducts() {
               <th>Product Details</th>
               <th>Category</th>
               <th>Price</th>
+              <th>Stock</th>
               <th>Promotional States</th>
               <th className="text-center">System Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {products?.map((product) => (
               <tr key={product._id}>
                 <td className="font-semibold">{product.name}</td>
+
                 <td className="capitalize">{product.category}</td>
+
                 <td>${product.price?.toFixed(2)}</td>
+
+                <td>
+                  {product.stock === 0 ? (
+                    <span
+                      className="badge-tag"
+                      style={{
+                        backgroundColor: "#fee2e2",
+                        color: "#dc2626",
+                      }}
+                    >
+                      Out of Stock
+                    </span>
+                  ) : product.stock <= 5 ? (
+                    <span
+                      className="badge-tag"
+                      style={{
+                        backgroundColor: "#fef3c7",
+                        color: "#d97706",
+                      }}
+                    >
+                      Low Stock ({product.stock})
+                    </span>
+                  ) : (
+                    <span
+                      className="badge-tag"
+                      style={{
+                        backgroundColor: "#d1fae5",
+                        color: "#059669",
+                      }}
+                    >
+                      {product.stock} Available
+                    </span>
+                  )}
+                </td>
+
                 <td>
                   {product.isFeatured && (
                     <span className="badge-tag featured">Featured ⭐️</span>
                   )}
+
                   {product.isTrending && (
                     <span className="badge-tag trending">Trending 🔥</span>
                   )}
                 </td>
+
                 <td className="text-center admin-action-cell">
                   <button
                     type="button"
@@ -422,6 +578,7 @@ export default function AdminProducts() {
                   >
                     Edit ✏️
                   </button>
+
                   <button
                     type="button"
                     className="btn-danger"

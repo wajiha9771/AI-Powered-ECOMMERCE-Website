@@ -11,9 +11,9 @@
   gap: 9px;
  border-radius: 50px;
   padding: 13px 20px;
-  background-color:#0f172a;
-  border: 1px solid rgb(179,195,217);
-  color:rgb(179,195,217);
+  background: rgb(5, 5, 5);
+  border: 1px solid rgb(4, 4, 4);
+   color: #908f8f;
   font-family: "Poppins", sans-serif;
   font-size: 19px;
   font-weight: 600;
@@ -25,9 +25,9 @@ transition:
 }
 .ai-floating-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgb(182, 181, 199);
-  background: rgb(16, 18, 51);
-  border: 1px solid #ffffff;;
+ 
+  background: rgb(13, 13, 13);
+  border: 1px solid rgb(26, 26, 26);
    color: #ffffff;
 }
 
@@ -52,7 +52,7 @@ transition:
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border: 1px solid #c8cdf0;
+  border: 1px solid #c0c1c2;
   border-radius: 24px;
   overflow: hidden;
   box-sizing: border-box;
@@ -81,8 +81,7 @@ transition:
   min-height: 74px;
   padding: 14px 18px;
   box-sizing: border-box;
-   background: rgb(16, 18, 51);
-  /* background: #1f1b5a; */
+   background: rgb(12, 12, 12);
   color: #ffffff;
   overflow: visible;
 }
@@ -164,9 +163,9 @@ transition:
   min-height: 0;
   overflow-y: auto;
   padding: 18px;
-  background: #dce2f0;
+  background: #ffffff;
   scrollbar-width: thin;
-  scrollbar-color: #8a91b5 transparent;
+  scrollbar-color: #9b9b9c transparent;
 }
 
 .ai-chat-messages::-webkit-scrollbar {
@@ -178,12 +177,12 @@ transition:
 }
 
 .ai-chat-messages::-webkit-scrollbar-thumb {
-  background: #8a91b5;
+  background: #f1f2f3;
   border-radius: 10px;
 }
 .ai-welcome {
   text-align: center;
-  color: #210c80;
+  color: #0e0e0e;
   padding: 35px 15px 20px;
 }
 
@@ -196,7 +195,7 @@ transition:
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #210c80;
+  color: #0d0d0d;
 }
 
 .ai-welcome p {
@@ -215,11 +214,11 @@ transition:
 }
 
 .ai-suggestions button {
-  border: 1px solid #85878f;
+  border: 1px solid #b1b2b7;
   border-radius: 20px;
   padding: 8px 12px;
-  background: #bbcfeb;
-  color: #1f1b5a;
+  background: #f6f7f7;
+  color: #151515;
   font-family: "Poppins", sans-serif;
   font-size: 11px;
   font-weight: 500;
@@ -228,9 +227,9 @@ transition:
 }
 
 .ai-suggestions button:hover {
-  background: #1f1b5a;
+  background: #0e0e0e;
   color: #ffffff;
-  border-color: #1f1b5a;
+  border-color: #282829;
 }
 .ai-message-row {
   display: flex;
@@ -257,16 +256,16 @@ transition:
 }
 
 .ai-message.user {
-  background: #6370b4;
-  color: #ffffff;
+  background: #cccbcb;
+  color: #2f2e2e;
   border-bottom-right-radius: 4px;
   font-size: 13px;
 }
 
 .ai-message.ai {
-  background: #c4d7f0;
-  color: #333333;
-  border: 1px solid #85878f;
+  background: #e9eaec;
+  color: #111111;
+  border: 1px solid #b4b4b5;
   border-bottom-left-radius: 4px;
 }
 .ai-products {
@@ -277,10 +276,9 @@ transition:
 }
 .ai-product-card {
   background: #ffffff;
-  border: 1px solid #a8a0a0;
+  border: 1px solid #d0cfcf;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
@@ -314,7 +312,7 @@ transition:
   top: 10px;
   left: 10px;
   z-index: 2;
-  background: #0c115a;
+  background: #0b0b0b;
   color: #ffffff;
   padding: 5px 9px;
   border-radius: 20px;
@@ -337,7 +335,7 @@ transition:
 
 .ai-product-details h4 {
   margin: 0;
-  color: #1c2453;
+  color: #070707;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
@@ -351,7 +349,7 @@ transition:
 }
 
 .ai-product-price strong {
-  color: #101033;
+  color: #050505;
   font-size: 16px;
   font-weight: 700;
 }
@@ -383,25 +381,25 @@ transition:
 
 .ai-view-button {
   background: #ffffff;
-  color: #101736;
+  color: #0f0f0f;
   border: 1px solid #888484;
   text-decoration: none;
 }
 
 .ai-view-button:hover {
-  background: #151a49;
+  background: #161617;
   color: #ffffff;
-  border-color: #151a49;
+  border-color: #101010;
 }
 
 .ai-cart-button {
-  background: #151a49;
+  background: #0d0d0d;
   color: #ffffff;
-  border: 1px solid #686565;
+  border: 1px solid #262525;
 }
 
 .ai-cart-button:hover {
-  background: #3d44ac;
+  background: #1f1f1f;
 }
 .ai-no-products {
   margin-top: 8px;
@@ -423,7 +421,7 @@ transition:
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #6370b4;
+  background: #202020;
   animation: aiTyping 1.2s infinite ease-in-out;
 }
 
@@ -473,7 +471,7 @@ transition:
 }
 
 .ai-input-container input:focus {
-  border-color: #1d124d;
+  border-color: #0b0b0b;
   box-shadow: 0 0 0 2px rgba(29, 18, 77, 0.08);
 }
 
@@ -489,7 +487,7 @@ transition:
   justify-content: center;
   border: none;
   border-radius: 11px;
-  background: #151244;
+  background: #070707;
   color: #ffffff;
   font-size: 18px;
   cursor: pointer;
@@ -499,7 +497,7 @@ transition:
 }
 
 .ai-send-button:hover {
-  background: #1f2c79;
+  background: #191919;
   transform: scale(1.04);
 }
 

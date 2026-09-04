@@ -7,7 +7,7 @@
 }
 
 .brand-badge {
-  background-color: #080aa0;
+  background-color: #0a0a0a;
   color: #ffff;
   width: fit-content;
   padding: 3px 8px;
@@ -24,19 +24,19 @@
   font-size: 32px;
   font-weight: 700;
   margin: 0 0 12px 0;
-  color: #1c095e;
+  color: #080808;
 }
 
 .product-price {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
-  color: #1c095e;
+  color: #1b1b1c;
 }
 
 .desc-divider {
-  border-top: 1px solid rgb(105, 114, 129);
-  border-bottom: 1px solid rgb(105, 114, 129);
+  border-top: 1px solid rgb(202, 203, 205);
+  border-bottom: 1px solid rgb(202, 203, 205);
   padding: 16px 0;
 }
 
@@ -56,7 +56,7 @@
 .matrix-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1c095e;
+  color: #0f0f0f;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 8px 0;
@@ -77,20 +77,20 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: #a6b9dd;
+  background-color: #f7fafd;
   color: #1a1a1b;
-  border: 2px solid #92addf;
+  border: 1px solid #9d9d9e;
 }
 
 .size-btn:hover {
-  background-color: #345491;
+  background-color: #090909;
   color: aliceblue;
 }
 
 .size-btn.active-size {
-  background-color: #161553;
+  background-color: #050505;
   color: aliceblue;
-  border: 2px solid #36a7e9;
+  border: 2px solid #222222;
 }
 
 .action-btn-wrapper {
@@ -99,21 +99,20 @@
 
 .add-cart-btn {
   width: 60%;
-  background-color: #0e0f44;
+  background-color: #0b0b0b;
   color: #ffff;
-  border: 2px solid #29d0ee;
   font-weight: bold;
   padding: 10px;
   border-radius: 9px;
   font-size: 22px;
   cursor: pointer;
-  box-shadow: 3px 4px 15px -3px #080aa0;
+
   transition: all 0.2s ease;
 }
 
 .add-cart-btn:hover {
-  background-color: #251d6e;
-  border: 2px solid #d2dd35;
+  background-color: #272728;
+
   color: aliceblue;
 }
 

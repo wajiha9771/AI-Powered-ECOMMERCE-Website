@@ -1,128 +1,183 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "./Nav.css";
 
 function DesktopSearchBar({
-voiceText,
-setVoiceText,
-isListening,
-handleVoiceSearch,
-totalItems,
-openDrawer,
-userInfo,
-handleLogout,
+  voiceText,
+  setVoiceText,
+  isListening,
+  handleVoiceSearch,
+  totalItems,
+  openDrawer,
+  userInfo,
+  handleLogout,
+  isSearchOpen,
+  setIsSearchOpen,
 }) {
-return ( <div className="navbar-search-row"> <div className="search-bar-wrapper"> <div className="navbar-search"> <svg className="search-svg-icon" viewBox="0 0 24 24" fill="none"> <path
-           d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-           stroke="currentColor"
-           strokeWidth="2"
-           strokeLinecap="round"
-           strokeLinejoin="round"
-         /> <path
-           d="M21 21L16.65 16.65"
-           stroke="currentColor"
-           strokeWidth="2"
-           strokeLinecap="round"
-           strokeLinejoin="round"
-         /> </svg>
-
-
-      <input
-        type="text"
-        placeholder={
-          isListening
-            ? "Speak now! 🗣 Listening...🎙️"
-            : "Search here..."
-        }
-        value={voiceText}
-        onChange={(e) => setVoiceText(e.target.value)}
-        className="navbar-search-input"
-      />
-
-      {voiceText && (
-        <button
-          type="button"
-          className="navbar-clear-search-btn"
-          onClick={() => setVoiceText("")}
-          title="Clear Search"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="16"
-            height="16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+  return (
+    <div
+      className={`search-overlay-panel ${isSearchOpen ? "panel-open" : "panel-closed"}`}
+    >
+      <div className="search-panel-container">
+        <div className="search-input-wrapper">
+          <svg className="search-svg-icon" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M21 21L16.65 16.65"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
-        </button>
-      )}
+          <input
+            type="text"
+            placeholder={
+              isListening
+                ? "SPEAK NOW! 🗣 LISTENING...🎙️"
+                : "SEARCH PRODUCTS, CATEGORIES, SEASONS..."
+            }
+            value={voiceText}
+            onChange={(e) => setVoiceText(e.target.value)}
+            className="search-field-input"
+            autoFocus={isSearchOpen}
+          />
+          {voiceText && (
+            <button
+              type="button"
+              className="search-clear-inline-btn"
+              onClick={() => setVoiceText("")}
+              title="Clear Search"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          )}
 
-      <button
-        type="button"
-        onClick={handleVoiceSearch}
-        className={`navbar-voice-search-btn ${
-          isListening ? "listening-active" : ""
-        }`}
-        title={isListening ? "Stop Listening" : "Search with AI Voice"}
-      >
-        {isListening ? (
-          <svg
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          {/* AI Voice Toggle Action Button */}
+          <button
+            type="button"
+            onClick={handleVoiceSearch}
+            className={`search-voice-mic-btn ${isListening ? "listening-active-pulse" : ""}`}
+            title={isListening ? "Stop Listening" : "Search with AI Voice"}
           >
-            <circle cx="12" cy="12" r="10" stroke="#fff" />
-            <rect x="9" y="9" width="6" height="6" fill="#fff" />
-          </svg>
-        ) : (
-          <svg
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            {isListening ? (
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="#ff4d4d"
+                  fill="#ff4d4d"
+                />
+                <rect x="9" y="9" width="6" height="6" fill="#fff" />
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 1v10M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8" />
+                <rect x="9" y="1" width="6" height="11" rx="3" ry="3" />
+              </svg>
+            )}
+          </button>
+          <Link
+            to={
+              voiceText.trim()
+                ? `/search?q=${encodeURIComponent(voiceText.trim())}`
+                : "#"
+            }
+            style={{ textDecoration: "none" }}
           >
-            <path d="M12 1v10M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8" />
-            <rect x="9" y="1" width="6" height="11" rx="3" ry="3" />
-          </svg>
-        )}
-      </button>
-
-      <Link
-        to={
-          voiceText.trim()
-            ? `/search?q=${encodeURIComponent(voiceText.trim())}`
-            : "#"
-        }
-        style={{ textDecoration: "none" }}
-      >
-        <button
-          type="button"
-          className="navbar-search-btn"
-          disabled={!voiceText.trim()}
-        >
-          Search
-        </button>
-      </Link>
+            <button
+              type="button"
+              className="search-submit-text-btn"
+              disabled={!voiceText.trim()}
+            >
+              Search
+            </button>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsSearchOpen(false)}
+            className="search-panel-close-btn"
+            aria-label="Close Panel"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div className="trending-tags-row">
+          <span className="trending-title">Trending:</span>
+          <button
+            type="button"
+            onClick={() => setVoiceText(" Men Shirt")}
+            className="tag-chip-btn"
+          >
+            Men Shirt
+          </button>
+          <button
+            type="button"
+            onClick={() => setVoiceText("Shoes")}
+            className="tag-chip-btn"
+          >
+            Shoes
+          </button>
+          <button
+            type="button"
+            onClick={() => setVoiceText(" Watches")}
+            className="tag-chip-btn"
+          >
+            Watches
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
-);
+  );
 }
 
 export default DesktopSearchBar;
